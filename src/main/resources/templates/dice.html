@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Dice</title>
+</head>
+<body>
+<form action="/dice" method="POST">
+    <label for="guess">Enter your guess</label>
+    <input type="number" name="guess" id="guess">
+    <label for="rolls">How many times you role</label>
+    <input type="number" name="rolls" id="rolls">
+    <button type="submit">Role!</button>
+</form>
+<!--<div th:if="">-->
+    <div th:each="item : ${rolls}">
+
+        <p th:text="${item}"></p>
+
+    </div>
+<p>You guessed <b th:text="${guess}"></b> got <b th:text="${right}"></b> out of <b th:text="${rolls.size()}"></b> right!</p>
+<!--</div>-->
+</body>
+</html>
