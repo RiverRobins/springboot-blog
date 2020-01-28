@@ -8,6 +8,7 @@ public class Post {
     private String title;
     private String body;
     private ArrayList<Comment> comments;
+    private ArrayList<Comment> topComments = new ArrayList<>();
 
     public Post(){}
 
@@ -17,6 +18,15 @@ public class Post {
         this.title = title;
         this.body = body;
         this.comments = comments;
+        if (comments.size() > 0) {
+            this.topComments.add(comments.get(0));
+        }
+        if (comments.size() > 1) {
+            this.topComments.add(comments.get(1));
+        }
+        if (comments.size() > 2) {
+            this.topComments.add(comments.get(2));
+        }
     }
 
     public Post(Long user_id, String title, String body, ArrayList<Comment> comments) {
@@ -24,6 +34,23 @@ public class Post {
         this.title = title;
         this.body = body;
         this.comments = comments;
+        if (comments.size() > 0) {
+            this.topComments.add(comments.get(0));
+        }
+        if (comments.size() > 1) {
+            this.topComments.add(comments.get(1));
+        }
+        if (comments.size() > 2) {
+            this.topComments.add(comments.get(2));
+        }
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public Long getUser_id() {
+        return user_id;
     }
 
     public String getTitle() {
@@ -48,5 +75,13 @@ public class Post {
 
     public void setComments(ArrayList<Comment> comments) {
         this.comments = comments;
+    }
+
+    public ArrayList<Comment> getTopComments() {
+        return topComments;
+    }
+
+    public void setTopComments(ArrayList<Comment> topComments) {
+        this.topComments = topComments;
     }
 }
