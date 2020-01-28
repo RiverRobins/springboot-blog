@@ -2,14 +2,13 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Index</title>
+    <title th:text="${post.getTitle()}"></title>
 </head>
 <body>
-<!--/*@thymesVar id="posts" type="com.codeup.springblog.models.Post"*/-->
-<div th:each="post : ${posts}">
+<div>
     <h3 th:text="${post.getTitle()}"></h3>
     <p th:text="${post.getBody()}"></p>
-    <div th:each="comment : ${post.getTopComments()}">
+    <div th:each="comment : ${post.getComments()}">
         <p th:text="${comment.getText()}"></p>
     </div>
 </div>
