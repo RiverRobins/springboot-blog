@@ -4,9 +4,14 @@ import javax.persistence.*;
 @Entity
 public class Doggo {
     @Id
+//    @Column(nullable = false, unique = true)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column
     private byte age;
+    @Column
     private String name;
+    @Column
     private String state;
 
     public Doggo(){}

@@ -1,4 +1,4 @@
-USE put_the_name_of_your_DB_here;
+USE doggos;
 INSERT INTO dogs (age, name, reside_state)
 VALUES
 (2, 'Chuck', 'TX'),
