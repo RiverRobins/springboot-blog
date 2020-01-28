@@ -1,0 +1,11 @@
+CREATE DATABASE IF NOT EXISTS doggos;
+USE doggos;
+DROP TABLE IF EXISTS dogs;
+CREATE TABLE "dogs" (
+id INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+age TINYINT(3) unsigned NOT NULL,
+name varchar(200) NOT NULL,
+reside_state char(2) DEFAULT 'XX',
+PRIMARY KEY (id),
+UNIQUE KEY `UK_?????????????????` (`age`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8

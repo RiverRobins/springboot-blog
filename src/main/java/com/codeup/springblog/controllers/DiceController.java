@@ -1,4 +1,4 @@
-package com.codeup.springblog;
+package com.codeup.springblog.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,11 +27,12 @@ public class DiceController {
             }
         }
         model.addAttribute("rolls", dice);
+        model.addAttribute("num", dice.size());
         model.addAttribute("right", right);
         return "dice";
     }
 
     private String diceRoll(){
-        return Integer.toString((int) Math.floor(Math.random() * 6));
+        return Integer.toString((int) Math.floor(1 + (Math.random() * 6)));
     }
 }

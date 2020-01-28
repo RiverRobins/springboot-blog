@@ -18,7 +18,7 @@
         <p th:text="${item}"></p>
 
     </div>
-<p>You guessed <b th:text="${guess}"></b> got <b th:text="${right}"></b> out of <b th:text="${rolls.size()}"></b> right!</p>
+<p>You guessed <b th:text="${guess}"></b>. You got <b th:text="${right}"></b> out of <b th:if="roled" th:text="${num}"></b> right!</p>
 <!--</div>-->
 </body>
 </html>
