@@ -5,13 +5,12 @@
     <title>Index</title>
 </head>
 <body>
-<!--/*@thymesVar id="posts" type="com.codeup.springblog.models.Post"*/-->
 <div th:each="post : ${posts}">
     <h3 th:text="${post.getTitle()}"></h3>
     <p th:text="${post.getBody()}"></p>
-    <div th:each="comment : ${post.getTopComments()}">
-        <p th:text="${comment.getText()}"></p>
-    </div>
+<!--    <div th:each="comment : ${post.getTopComments()}">-->
+<!--        <p th:text="${comment.getText()}"></p>-->
+<!--    </div>-->
 </div>
 </body>
 </html>
