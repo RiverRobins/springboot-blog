@@ -3,11 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title th:text="${post.getTitle()}"></title>
+    <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
 <div>
-    <h3 th:text="${post.getTitle()}"></h3>
-    <p th:text="${post.getBody()}"></p>
+    <div class="post-head">
+        <h5 class="username" th:text="${post.getUser().getUsername()}"></h5>
+        <h3 th:text="${post.getTitle()}"></h3>
+    </div>
+    <div class="post-body">
+        <p th:text="${post.getBody()}"></p>
+    </div>
     <div>
         <form th:action='${"/posts/" +post.getId()+ "/comment"}' method="POST">
             <input type="hidden" name="user" th:value="${1}">
@@ -16,8 +22,11 @@
             <button type="submit">Post Comment</button>
         </form>
     </div>
-    <div th:each="comment : ${post.getComments()}">
-        <p th:text="${comment.getBody()}"></p>
+    <div class="comments outline">
+        <div th:each="comment : ${post.getTopComments()}" class="comment">
+            <h5 class="username" th:text="${comment.getUser().getUsername()}"></h5>
+            <p th:text="${comment.getBody()}"></p>
+        </div>
     </div>
 </div>
 </body>
