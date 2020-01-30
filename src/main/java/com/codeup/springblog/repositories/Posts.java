@@ -4,5 +4,5 @@ import com.codeup.springblog.models.Post;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface Posts extends JpaRepository<Post, Long> {
-    public void deleteById(Long n);
+    void deleteById(Long n);
 }

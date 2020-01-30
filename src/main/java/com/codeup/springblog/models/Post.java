@@ -1,8 +1,8 @@
 package com.codeup.springblog.models;
 
-//import org.springframework.data.annotation.Id;
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name="posts")
@@ -12,81 +12,74 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private Long userId;
-
     @Column(length = 100)
     private String title;
 
     @Column(nullable = false, columnDefinition = "TEXT")
     private String body;
 
-//    private ArrayList<Comment> comments;
-//    private ArrayList<Comment> topComments = new ArrayList<>();
+    @Column(nullable = false)
+    private Long user_id;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", insertable = false, updatable = false)
+    private User user;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
+    private List<Comment> comments;
+
+//    @Transient
+//    private List<Comment> topComments;
 
     public Post(){}
 
-    public Post(Long user_id, String title, String body) {
-        this.userId = user_id;
+    public Post(String title, String body, Long user_id) {
+        this.user_id = user_id;
         this.title = title;
         this.body = body;
     }
 
-    public Post(String title, String body) {
-        this.title = title;
-        this.body = body;
-    }
-
-    public Post(Long id, Long user_id, String title, String body) {
+    public Post(Long id, String title, String body, Long user_id) {
         this.id = id;
-        this.userId = user_id;
+        this.user_id = user_id;
         this.title = title;
         this.body = body;
     }
 
-//    public Post(Long id, Long user_id, String title, String body, ArrayList<Comment> comments) {
-//        this.id = id;
-//        this.userId = user_id;
-//        this.title = title;
-//        this.body = body;
-//        this.comments = comments;
-//        if (comments.size() > 0) {
-//            this.topComments.add(comments.get(0));
-//        }
-//        if (comments.size() > 1) {
-//            this.topComments.add(comments.get(1));
-//        }
-//        if (comments.size() > 2) {
-//            this.topComments.add(comments.get(2));
-//        }
-//    }
+    public List<Comment> getTopComments(){
+        List<Comment> topComments = new ArrayList<>();
+        try {
+            for (int i = 0; i < 3 && i < this.comments.size(); i++) {
+                topComments.add(this.comments.get(i));
+            }
+        } catch (Exception ignored){
+            return topComments;
+        }
+        return topComments;
+    }
 
-//    public Post(Long user_id, String title, String body, ArrayList<Comment> comments) {
-//        this.userId = user_id;
-//        this.title = title;
-//        this.body = body;
-//        this.comments = comments;
-//        if (comments.size() > 0) {
-//            this.topComments.add(comments.get(0));
-//        }
-//        if (comments.size() > 1) {
-//            this.topComments.add(comments.get(1));
-//        }
-//        if (comments.size() > 2) {
-//            this.topComments.add(comments.get(2));
-//        }
-//    }
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public User getUser() {
+        return this.user;
+    }
+
+    public List<Comment> getComments() {
+        return this.comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
 
     public Long getId() {
-        return id;
-    }
-
-    public Long getUserId() {
-        return userId;
+        return this.id;
     }
 
     public String getTitle() {
-        return title;
+        return this.title;
     }
 
     public void setTitle(String title) {
@@ -100,20 +93,4 @@ public class Post {
     public void setBody(String body) {
         this.body = body;
     }
-
-//    public ArrayList<Comment> getComments() {
-//        return comments;
-//    }
-//
-//    public void setComments(ArrayList<Comment> comments) {
-//        this.comments = comments;
-//    }
-//
-//    public ArrayList<Comment> getTopComments() {
-//        return topComments;
-//    }
-//
-//    public void setTopComments(ArrayList<Comment> topComments) {
-//        this.topComments = topComments;
-//    }
 }

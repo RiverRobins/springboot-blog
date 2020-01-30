@@ -5,12 +5,22 @@
     <title>Index</title>
 </head>
 <body>
-<div th:each="post : ${posts}">
-    <h3 th:text="${post.getTitle()}"></h3>
-    <p th:text="${post.getBody()}"></p>
-<!--    <div th:each="comment : ${post.getTopComments()}">-->
-<!--        <p th:text="${comment.getText()}"></p>-->
-<!--    </div>-->
+<div id="posts">
+    <div th:each="post : ${posts}" class="post-container outline">
+        <div class="post-head">
+            <h5 th:text="${post.getUser().getUsername()}"></h5>
+            <h3 th:text="${post.getTitle()}"></h3>
+        </div>
+        <div class="post-body">
+            <p th:text="${post.getBody()}"></p>
+        </div>
+        <div class="comments">
+            <div th:each="comment : ${post.getTopComments()}" class="comment">
+                <h5 th:text="${comment.getUser().getUsername()}"></h5>
+                <p th:text="${comment.getBody()}"></p>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 </html>

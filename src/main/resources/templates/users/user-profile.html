@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${user.getUsername() + '\'s profile'}"></title>
+</head>
+<body>
+    <div>
+        <h3 th:text="${user.getUsername()}"></h3>
+        <div>
+            <div th:each="post : ${user.getPosts()}">
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>

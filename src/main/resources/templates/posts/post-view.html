@@ -8,9 +8,9 @@
 <div>
     <h3 th:text="${post.getTitle()}"></h3>
     <p th:text="${post.getBody()}"></p>
-<!--    <div th:each="comment : ${post.getComments()}">-->
-<!--        <p th:text="${comment.getText()}"></p>-->
-<!--    </div>-->
+    <div th:each="comment : ${post.getComments()}">
+        <p th:text="${comment.getBody()}"></p>
+    </div>
 </div>
 </body>
 </html>

@@ -1,7 +1,9 @@
 package com.codeup.springblog.controllers;
-//import com.codeup.springblog.models.Comment;
-import com.codeup.springblog.models.Post;
+
+import com.codeup.springblog.models.*;
+import com.codeup.springblog.repositories.Comments;
 import com.codeup.springblog.repositories.Posts;
+import com.codeup.springblog.repositories.Users;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -11,8 +13,14 @@ public class PostController {
 
     private final Posts pDoa;
 
-    public PostController(Posts p) {
-        this.pDoa = p;
+    private final Users usersDoa;
+
+    private final Comments commentsDoa;
+
+    public PostController(Posts pDoa, Users usersDoa, Comments commentsDoa) {
+        this.pDoa = pDoa;
+        this.usersDoa = usersDoa;
+        this.commentsDoa = commentsDoa;
     }
 
     @GetMapping(path = "/posts")
@@ -37,7 +45,7 @@ public class PostController {
     @PostMapping(path = "/posts/{id}/edit")
     public String editPost(@PathVariable String id, Model model, @RequestParam(name = "title") String title, @RequestParam(name = "body") String body){
         Post old = pDoa.getOne(Long.parseLong(id));
-        Post temp = new Post( old.getId(), old.getUserId(), title, body);
+        Post temp = new Post(old.getId(), title, body, old.getUser().getId());
         pDoa.save(temp);
         model.addAttribute("post", pDoa.getOne(Long.parseLong(id)));
         return "posts/post-view";
@@ -49,15 +57,16 @@ public class PostController {
         return "redirect:/posts";
     }
 
-    @RequestMapping(path = "/posts/create", method = RequestMethod.GET)
-    @ResponseBody
-    public String createGet() {
-        return "Create post form";
+    @GetMapping(path = "/posts/create")
+    public String createGet(Model model) {
+        model.addAttribute("user", usersDoa.findById(1L));
+        return "posts/post-create";
     }
 
-    @RequestMapping(path = "/posts/create", method = RequestMethod.POST)
-    @ResponseBody
-    public String createPost() {
-        return "Create post add";
+    @PostMapping(path = "/posts/create")
+    public String createPost(Model model, @RequestParam(name = "title") String title, @RequestParam(name = "body") String body, @RequestParam(name = "user") Long user) {
+        Post temp = new Post(title, body, user);
+        pDoa.save(temp);
+        return "redirect:/posts";
     }
 }
