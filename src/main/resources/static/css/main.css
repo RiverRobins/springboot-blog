@@ -1,0 +1,34 @@
+#posts {
+    position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /*align-items: center;*/
+    margin: 0;
+    padding: 15%;
+}
+.outline{
+    border: 1px solid lightgray;
+}
+.post-container{
+    margin: 5px 5px 5px 5px; /*TRBL*/
+    padding: auto;
+}
+.post-head{
+    font-weight: bold;
+}
+.comment{
+    margin-left: 10%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    color: #404040;
+}
+.username{
+    justify-self: left;
+    color: black;
+    border-radius: 8px;
+    border: 1px solid darkgray;
+    background-color: darkgray;
+}

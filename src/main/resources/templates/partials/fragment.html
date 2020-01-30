@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>You shouldn't see this</title>
+</head>
+<body>
+    <div th:fragment="nav">
+        <div>
+            <nav>
+                <ul>
+                    <li><a href="/posts"> Posts </a></li>
+                    <li><a href="/users"> Users </a></li>
+                    <li><a th:href="'/users/' + ${1}"> Your Profile </a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <div th:fragment="post">
+
+    </div>
+
+    <div th:fragment="comment">
+
+    </div>
+
+
+
+</body>
+</html>

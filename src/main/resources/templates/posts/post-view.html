@@ -8,6 +8,14 @@
 <div>
     <h3 th:text="${post.getTitle()}"></h3>
     <p th:text="${post.getBody()}"></p>
+    <div>
+        <form th:action='${"/posts/" +post.getId()+ "/comment"}' method="POST">
+            <input type="hidden" name="user" th:value="${1}">
+            <label for="body">Leave a comment</label>
+            <input id="body" name="body" type="text" placeholder="Enter comment here">
+            <button type="submit">Post Comment</button>
+        </form>
+    </div>
     <div th:each="comment : ${post.getComments()}">
         <p th:text="${comment.getBody()}"></p>
     </div>

@@ -3,20 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <title>Index</title>
+    <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
 <div id="posts">
     <div th:each="post : ${posts}" class="post-container outline">
         <div class="post-head">
-            <h5 th:text="${post.getUser().getUsername()}"></h5>
+            <h5 class="username" th:text="${post.getUser().getUsername()}"></h5>
             <h3 th:text="${post.getTitle()}"></h3>
         </div>
         <div class="post-body">
             <p th:text="${post.getBody()}"></p>
         </div>
-        <div class="comments">
+
+        <div class="comments outline">
             <div th:each="comment : ${post.getTopComments()}" class="comment">
-                <h5 th:text="${comment.getUser().getUsername()}"></h5>
+                <h5 class="username" th:text="${comment.getUser().getUsername()}"></h5>
                 <p th:text="${comment.getBody()}"></p>
             </div>
         </div>

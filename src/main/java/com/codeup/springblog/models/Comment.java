@@ -38,16 +38,18 @@ public class Comment {
         this.body = body;
         this.user = user;
         this.post = post;
+        this.user_id = this.user.getId();
+        this.post_id = this.post.getId();
     }
 
     public Comment(Long user_id, String text) {
-//        this.user_id = user_id;
+        this.user_id = user_id;
         this.body = text;
     }
 
     public Comment(Long id, Long user_id, String text) {
         this.id = id;
-//        this.user_id = user_id;
+        this.user_id = user_id;
         this.body = text;
     }
 

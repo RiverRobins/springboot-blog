@@ -11,9 +11,6 @@
         <input id="title" name="title" type="text" th:value="${post.getTitle()}">
         <label for="body"></label>
         <input id="body" name="body" type="text" th:value="${post.getBody()}">
-        <!--    <div th:each="comment : ${post.getComments()}">-->
-        <!--        <p th:text="${comment.getText()}"></p>-->
-        <!--    </div>-->
         <input type="hidden" name="edited" value="true">
         <button type="submit">Save Changes</button>
     </form>
