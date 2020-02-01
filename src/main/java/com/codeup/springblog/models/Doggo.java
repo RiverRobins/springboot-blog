@@ -1,8 +1,26 @@
-//package com.codeup.springblog.models;
-//import javax.persistence.*;
-//
-//@Entity
-//public class Doggo {
+package com.codeup.springblog.models;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Doggo {
+    public static ArrayList<Post> reverse(List<Post> n){
+        ArrayList<Post> temp = new ArrayList<>();
+        for (int i = n.size() - 1; i > 0; i--) {
+            temp.add(n.get(i));
+        }
+        return temp;
+    }
+
+    public static ArrayList<Comment> reverse(List<Comment> n, int n2){
+        ArrayList<Comment> temp = new ArrayList<>();
+        for (int i = n.size() - 1; i > 0; i--) {
+            temp.add(n.get(i));
+        }
+        return temp;
+    }
+
+
 //    @Id
 ////    @Column(nullable = false, unique = true)
 //    @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -52,4 +70,4 @@
 //    public void setState(String state) {
 //        this.state = state;
 //    }
-//}
+}

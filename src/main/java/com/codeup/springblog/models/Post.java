@@ -60,6 +60,7 @@ public class Post {
 
     public void setUser(User user) {
         this.user = user;
+        this.user_id = user.getId();
     }
 
     public User getUser() {
@@ -67,7 +68,7 @@ public class Post {
     }
 
     public List<Comment> getComments() {
-        return this.comments;
+        return Doggo.reverse(this.comments, 1);
     }
 
     public void setComments(List<Comment> comments) {
@@ -92,5 +93,13 @@ public class Post {
 
     public void setBody(String body) {
         this.body = body;
+    }
+
+    public Long getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(Long user_id) {
+        this.user_id = user_id;
     }
 }

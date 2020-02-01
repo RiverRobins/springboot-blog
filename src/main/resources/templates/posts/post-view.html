@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title th:text="${post.getTitle()}"></title>
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
-<div>
+<div class="post-container outline">
     <div class="post-head">
         <h5 class="username" th:text="${post.getUser().getUsername()}"></h5>
         <h3 th:text="${post.getTitle()}"></h3>
@@ -22,8 +22,8 @@
             <button type="submit">Post Comment</button>
         </form>
     </div>
-    <div class="comments outline">
-        <div th:each="comment : ${post.getTopComments()}" class="comment">
+    <div class="comments outline-top">
+        <div th:each="comment : ${post.getComments()}" class="comment">
             <h5 class="username" th:text="${comment.getUser().getUsername()}"></h5>
             <p th:text="${comment.getBody()}"></p>
         </div>

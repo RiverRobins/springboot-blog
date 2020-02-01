@@ -10,9 +10,12 @@
 .outline{
     border: 1px solid lightgray;
 }
+.outline-top{
+    border-top: 1px solid lightgray;
+}
 .post-container{
     margin: 5px 5px 5px 5px; /*TRBL*/
-    padding: auto;
+    padding: 5px;
 }
 .post-head{
     font-weight: bold;

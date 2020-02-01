@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Post</title>
+    <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
-<div>
-    <form th:action='${"/posts/create"}' method="POST">
-        <input type="hidden" name="user" th:value="${user.get().getId()}">
-        <label for="title">Title</label>
-        <input id="title" name="title" type="text" placeholder="Enter title here">
-        <label for="body"></label>
-        <input id="body" name="body" type="text" placeholder="Enter body here">
+<div class="post-container outline">
+    <!--/*@thymesVar id="post" type="com.codeup.springblog.models.Post"*/-->
+    <form th:action='${"/posts/create"}' method="POST" th:object="${post}">
+        <input type="hidden" name="user" th:value="${user.get().getId()}"> <!--user.get().getId()  -->
+        <input id="title" th:field="*{title}" name="title" type="text" placeholder="Enter title here" class="post-head">
+        <textarea id="body" th:field="*{body}" name="body" placeholder="Enter body here" class=""></textarea>
         <input type="hidden" name="edited" value="true">
         <button type="submit">Create Post</button>
     </form>

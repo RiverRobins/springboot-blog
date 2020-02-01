@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title th:text="${post.getTitle()}"></title>
+    <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
-<div>
+<div class="post-container">
     <form th:action='${"/posts/" + post.getId() +"/edit"}' th:method="POST">
         <label for="title">Title</label>
         <input id="title" name="title" type="text" th:value="${post.getTitle()}">
         <label for="body"></label>
-        <input id="body" name="body" type="text" th:value="${post.getBody()}">
+        <textarea id="body" name="body" th:value="${post.getBody()}"></textarea>
         <input type="hidden" name="edited" value="true">
         <button type="submit">Save Changes</button>
     </form>
@@ -18,6 +19,15 @@
         <label for="delete">Delete post</label>
         <button id="delete" type="submit">Delete Post</button>
     </form>
+    <div class="comments outline">
+        <div th:each="comment : ${post.getComments()}" class="comment">
+            <form th:action='${"/posts/" + post.getId() +"/edit/delete-comment/" + comment.getId()}' method="post">
+                <button type="submit">Delete Comment</button>
+            </form>
+            <h5 class="username" th:text="${comment.getUser().getUsername()}"></h5>
+            <p th:text="${comment.getBody()}"></p>
+        </div>
+    </div>
 </div>
 </body>
 </html>
