@@ -15,7 +15,6 @@
         <div class="post-body">
             <p th:text="${post.getBody()}"></p>
         </div>
-
         <div class="comments outline">
             <div th:each="comment : ${post.getTopComments()}" class="comment">
                 <h5 class="username" th:text="${comment.getUser().getUsername()}"></h5>

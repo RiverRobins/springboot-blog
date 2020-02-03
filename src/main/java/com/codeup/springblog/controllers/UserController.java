@@ -22,6 +22,12 @@ public class UserController {
         this.commentsDoa = commentsDoa;
     }
 
+    @GetMapping(path = "/login")
+    public String showLogin(){
+        return "users/login";
+    }
+
+
     @GetMapping(path = "/users")
     public String users(Model model) {
         model.addAttribute("posts", usersDoa.findAll());

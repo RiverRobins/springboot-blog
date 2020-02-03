@@ -41,6 +41,9 @@ public class User {
         this.bio = bio;
     }
 
+    public User(User user) {
+    }
+
     public List<Post> getPosts() {
         return posts;
     }

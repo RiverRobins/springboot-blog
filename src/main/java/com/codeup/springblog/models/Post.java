@@ -95,7 +95,7 @@ public class Post {
         this.body = body;
     }
 
-    public Long getUser_id() {
+    public Long getUser_id(Long id) {
         return user_id;
     }
 

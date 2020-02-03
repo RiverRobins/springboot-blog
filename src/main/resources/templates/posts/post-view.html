@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title th:text="${post.getTitle()}"></title>
@@ -14,9 +14,8 @@
     <div class="post-body">
         <p th:text="${post.getBody()}"></p>
     </div>
-    <div>
+    <div sec:authorize="isAuthenticated()">
         <form th:action='${"/posts/" +post.getId()+ "/comment"}' method="POST">
-            <input type="hidden" name="user" th:value="${1}">
             <label for="body">Leave a comment</label>
             <input id="body" name="body" type="text" placeholder="Enter comment here">
             <button type="submit">Post Comment</button>

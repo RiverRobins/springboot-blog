@@ -4,17 +4,10 @@ import com.codeup.springblog.models.*;
 import com.codeup.springblog.repositories.Comments;
 import com.codeup.springblog.repositories.Posts;
 import com.codeup.springblog.repositories.Users;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.mail.MailException;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
 
 @Controller
 public class PostController {
@@ -50,9 +43,13 @@ public class PostController {
 
     @GetMapping(path = "/posts/{id}/edit")
     public String editGet(@PathVariable String id, Model model){
-        Post old = pDoa.getOne(Long.parseLong(id));
-        model.addAttribute("post", old);
-        return "posts/post-edit";
+        User cUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (cUser.getId() == (long) pDoa.findById(Long.parseLong(id)).get().getUser_id(cUser.getId())) {
+            Post old = pDoa.getOne(Long.parseLong(id));
+            model.addAttribute("post", old);
+            return "posts/post-edit";
+        }
+        return "redirect:posts/" + id;
     }
 
     @PostMapping(path = "/posts/{id}/edit")
@@ -79,8 +76,8 @@ public class PostController {
 
     @PostMapping(path = "/posts/create")
     public String createPost(@ModelAttribute Post temp) { //@RequestParam(name = "title") String title, @RequestParam(name = "body") String body, @RequestParam(name = "user"), Long user
-//        Post temp = new Post(title, body, user);
-        pDoa.save(temp);
+        User cUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        temp.setUser_id(cUser.getId());
         this.emailSvc.prepareAndSend(temp, "A new post was created!", temp.getTitle() + "\n" + temp.getBody());
         return "redirect:/posts";
     }

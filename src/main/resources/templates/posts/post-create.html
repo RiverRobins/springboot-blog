@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Post</title>
@@ -9,7 +10,7 @@
 <div class="post-container outline">
     <!--/*@thymesVar id="post" type="com.codeup.springblog.models.Post"*/-->
     <form th:action='${"/posts/create"}' method="POST" th:object="${post}">
-        <input type="hidden" name="user" th:value="${user.get().getId()}"> <!--user.get().getId()  -->
+<!--        <input type="hidden" name="user" th:value="${user.get().getId()}"> &lt;!&ndash;user.get().getId()  &ndash;&gt;-->
         <input id="title" th:field="*{title}" name="title" type="text" placeholder="Enter title here" class="post-head">
         <textarea id="body" th:field="*{body}" name="body" placeholder="Enter body here" class=""></textarea>
         <input type="hidden" name="edited" value="true">
