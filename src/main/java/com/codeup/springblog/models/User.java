@@ -9,7 +9,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(nullable = false, length = 100)
+    @Column(nullable = false, length = 100, unique = true)
     private String username;
     @Column(nullable = false)
     private String email;
@@ -26,6 +26,14 @@ public class User {
 
     public User(){}
 
+    public User(User copy) {
+        id = copy.id; // This line is SUPER important! Many things won't work if it's absent
+        this.email = copy.email;
+        this.username = copy.username;
+        this.password = copy.password;
+        this.bio = copy.bio;
+    }
+
     public User(String username, String email, String password, String bio) {
         this.username = username;
         this.email = email;
@@ -39,9 +47,6 @@ public class User {
         this.email = email;
         this.password = password;
         this.bio = bio;
-    }
-
-    public User(User user) {
     }
 
     public List<Post> getPosts() {

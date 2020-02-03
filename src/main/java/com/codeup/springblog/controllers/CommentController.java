@@ -4,6 +4,7 @@ import com.codeup.springblog.models.*;
 import com.codeup.springblog.repositories.Comments;
 import com.codeup.springblog.repositories.Posts;
 import com.codeup.springblog.repositories.Users;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -31,8 +32,9 @@ public class CommentController {
 //    }
 
     @PostMapping(path = "/posts/{id}/comment")
-    public String createPost(Model model, @PathVariable(name = "id") String postId, @RequestParam(name = "body") String body, @RequestParam(name = "user") String user) {
-        Comment temp = new Comment(body, usersDoa.getOne(Long.parseLong(user)), pDoa.getOne(Long.parseLong(postId)));
+    public String createPost(Model model, @PathVariable(name = "id") String postId, @RequestParam(name = "body") String body) {
+        User cUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Comment temp = new Comment(body, usersDoa.getOne(cUser.getId()), pDoa.getOne(Long.parseLong(postId)));
         commentsDoa.save(temp);
         return "redirect:/posts/" + postId;
     }

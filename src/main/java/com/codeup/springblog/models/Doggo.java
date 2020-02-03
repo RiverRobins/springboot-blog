@@ -6,7 +6,13 @@ import java.util.List;
 public class Doggo {
     public static ArrayList<Post> reverse(List<Post> n){
         ArrayList<Post> temp = new ArrayList<>();
-        for (int i = n.size() - 1; i > 0; i--) {
+        if (n == null){
+            return temp;
+        }
+        if (n.size() == 0){
+            return temp;
+        }
+        for (int i = n.size() - 1; i >= 0; i--) {
             temp.add(n.get(i));
         }
         return temp;
@@ -14,7 +20,13 @@ public class Doggo {
 
     public static ArrayList<Comment> reverse(List<Comment> n, int n2){
         ArrayList<Comment> temp = new ArrayList<>();
-        for (int i = n.size() - 1; i > 0; i--) {
+        if (n == null){
+            return temp;
+        }
+        if (n.size() < 1){
+            return temp;
+        }
+        for (int i = n.size() - 1; i >= 0; i--) {
             temp.add(n.get(i));
         }
         return temp;

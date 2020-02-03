@@ -22,7 +22,6 @@ public class SecSvc implements UserDetailsService {
         if (user == null) {
             throw new UsernameNotFoundException("No user found for " + username);
         }
-
         return new UserWR(user);
     }
 }

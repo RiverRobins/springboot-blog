@@ -46,11 +46,27 @@ public class Post {
         this.body = body;
     }
 
+    public Post(String title, String body, User user) {
+        this.user = user;
+        this.user_id = this.user.getId();
+        this.title = title;
+        this.body = body;
+    }
+
+    public Post(Long id, String title, String body, User user) {
+        this.id = id;
+        this.user = user;
+        this.user_id = this.user.getId();
+        this.title = title;
+        this.body = body;
+    }
+
     public List<Comment> getTopComments(){
         List<Comment> topComments = new ArrayList<>();
+        List<Comment> re = Doggo.reverse(this.comments, 1);
         try {
-            for (int i = 0; i < 3 && i < this.comments.size(); i++) {
-                topComments.add(this.comments.get(i));
+            for (int i = 0; i < 3 && i < re.size(); i++) {
+                topComments.add(re.get(i));
             }
         } catch (Exception ignored){
             return topComments;
@@ -95,7 +111,7 @@ public class Post {
         this.body = body;
     }
 
-    public Long getUser_id(Long id) {
+    public Long getUser_id() {
         return user_id;
     }
 
