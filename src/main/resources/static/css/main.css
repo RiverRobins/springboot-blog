@@ -28,10 +28,18 @@
     justify-content: center;
     color: #404040;
 }
-.username{
+.username , .email {
     justify-self: left;
     color: black;
     border-radius: 8px;
     border: 1px solid darkgray;
     background-color: darkgray;
+    size: auto;
+}
+.profile-head{
+    position: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 }

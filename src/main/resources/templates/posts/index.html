@@ -9,15 +9,15 @@
 <div id="posts">
     <div th:each="post : ${posts}" class="post-container outline">
         <div class="post-head">
-            <h5 class="username" th:text="${post.getUser().getUsername()}"></h5>
-            <h3 th:text="${post.getTitle()}"></h3>
+            <h5 class="username"><a th:href="${'/users/' + post.getUser().getId()}" th:text="${post.getUser().getUsername()}"></a></h5>
+            <h3><a th:href="${'/posts/' + post.getId()}" th:text="${post.getTitle()}"></a></h3>
         </div>
         <div class="post-body">
             <p th:text="${post.getBody()}"></p>
         </div>
         <div class="comments outline">
             <div th:each="comment : ${post.getTopComments()}" class="comment">
-                <h5 class="username" th:text="${comment.getUser().getUsername()}"></h5>
+                <h5 class="username"><a th:href="${'/users/' + post.getUser().getId()}" th:text="${post.getUser().getUsername()}"></a></h5>
                 <p th:text="${comment.getBody()}"></p>
             </div>
         </div>

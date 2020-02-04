@@ -46,12 +46,6 @@ public class UserController {
         return "users/login";
     }
 
-//    @PostMapping(path = "login")
-//    public String login(){
-//
-//        return "redirect:/posts";
-//    }
-
     @GetMapping(path = "/users")
     public String users(Model model) {
         model.addAttribute("posts", usersDoa.findAll());
