@@ -9,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -86,7 +85,7 @@ public class PostController {
     }
 
     @PostMapping(path = "/posts/create")
-    public String createPost(@ModelAttribute Post temp) { //@RequestParam(name = "title") String title, @RequestParam(name = "body") String body, @RequestParam(name = "user"), Long user
+    public String createPost(@ModelAttribute Post temp) {
         User cUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         temp.setUser_id(cUser.getId());
         pDoa.save(temp);
