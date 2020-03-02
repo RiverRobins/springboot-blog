@@ -28,8 +28,8 @@ public class Post {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
     private List<Comment> comments;
 
-//    @Transient
-//    private List<Comment> topComments;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
+    private List<RatePost> rates;
 
     public Post(){}
 

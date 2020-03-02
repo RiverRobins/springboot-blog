@@ -1,6 +1,7 @@
 package com.codeup.springblog.models;
 
 import javax.persistence.*;
+import java.util.List;
 
 
 @Entity
@@ -23,6 +24,9 @@ public class Comment {
     @ManyToOne
     @JoinColumn(name = "post_id", insertable = false, updatable = false)
     private Post post;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "comment")
+    private List<Rate> rates;
 
     public Post getPost() {
         return this.post;
