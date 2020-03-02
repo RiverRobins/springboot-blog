@@ -10,13 +10,7 @@ public class Upvote {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false)
-    private Long parent_id;
-    @Column(nullable = false)
-    private Long parent_type;
-    @Column(nullable = false)
-    private Long user_id;
-    @Column(nullable = false)
-    private Integer value;
+    private Byte value = 0;
 
     @ManyToOne
     @JoinColumn(name = "user_id", insertable = false, updatable = false)
@@ -36,13 +30,11 @@ public class Upvote {
 
     public Upvote(){}
 
-    public Upvote(Long parent_id, Long parent_type, Long user_id, Integer value, User user, Post post) {
-        this.parent_id = parent_id;
-        this.parent_type = parent_type;
-        this.user_id = user_id;
+    public Upvote(Byte value, User user, Post post) {
         this.value = value;
         this.user = user;
         this.post = post;
     }
+
 
 }

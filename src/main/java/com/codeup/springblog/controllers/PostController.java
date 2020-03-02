@@ -92,8 +92,15 @@ public class PostController {
 //        this.emailSvc.prepareAndSend(temp, "A new post was created!", temp.getTitle() + "\n" + temp.getBody());
         return "redirect:/posts";
     }
+
     @PostMapping(path = "/posts/{postId}/edit/delete-comment/{commentId}")
-    public String delete(@PathVariable String postId, @PathVariable String commentId){
+    public String deleteCom(@PathVariable String postId, @PathVariable String commentId){
+        commentsDoa.deleteById(Long.parseLong(commentId));
+        return "redirect:/posts/" + postId + "/edit";
+    }
+
+    @PostMapping(path = "/posts/{postId}/like")
+    public String like(@PathVariable String postId, @PathVariable String commentId){
         commentsDoa.deleteById(Long.parseLong(commentId));
         return "redirect:/posts/" + postId + "/edit";
     }
