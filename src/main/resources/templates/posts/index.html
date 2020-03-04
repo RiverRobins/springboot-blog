@@ -1,30 +1,86 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Posts</title>-->
+<!--    <link rel="stylesheet" href="/css/main.css">-->
+<!--</head>-->
+<!--<body>-->
+<!--<div id="posts">-->
+<!--    <div th:each="post : ${posts}" class="post-container outline">-->
+<!--        <div class="post-head">-->
+<!--            <h5 class="username"><a th:href="${'/users/' + post.getUser().getId()}" th:text="${post.getUser().getUsername()}"></a></h5>-->
+<!--            <h3><a th:href="${'/posts/' + post.getId()}" th:text="${post.getTitle()}"></a></h3>-->
+<!--        </div>-->
+<!--        <div class="post-body">-->
+<!--            <p th:text="${post.getBody()}"></p>-->
+<!--        </div>-->
+<!--        <div>-->
+<!--            <h5 th:text="${post.getRating()}">0</h5>-->
+<!--        </div>-->
+<!--        <div class="comments outline">-->
+<!--            <div th:each="comment : ${post.getTopComments()}" class="comment">-->
+<!--                <h5 class="username"><a th:href="${'/users/' + post.getUser().getId()}" th:text="${post.getUser().getUsername()}"></a></h5>-->
+<!--                <p th:text="${comment.getBody()}"></p>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->
+
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Posts</title>
     <link rel="stylesheet" href="/css/main.css">
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <script>
+        function likePost(postId) {
+            $.ajax("", {
+                type: "POST",
+                data: {
+                    id: postId
+                },
+                success: function () {
+                    console.log("Post with id of " + postId + " liked!");
+                }
+            })
+        }
+    </script>
 </head>
 <body>
 <div id="posts">
     <div th:each="post : ${posts}" class="post-container outline">
-        <div class="post-head">
-            <h5 class="username"><a th:href="${'/users/' + post.getUser().getId()}" th:text="${post.getUser().getUsername()}"></a></h5>
-            <h3><a th:href="${'/posts/' + post.getId()}" th:text="${post.getTitle()}"></a></h3>
-        </div>
-        <div class="post-body">
-            <p th:text="${post.getBody()}"></p>
-        </div>
-        <div>
-            <h5 th:text="${post.getRating()}">0</h5>
-        </div>
-        <div class="comments outline">
-            <div th:each="comment : ${post.getTopComments()}" class="comment">
+        <div class="post" th:id="${'post-'+ post.getId()}">
+            <div class="post-head">
                 <h5 class="username"><a th:href="${'/users/' + post.getUser().getId()}" th:text="${post.getUser().getUsername()}"></a></h5>
-                <p th:text="${comment.getBody()}"></p>
+                <h3><a th:href="${'/posts/' + post.getId()}" th:text="${post.getTitle()}"></a></h3>
+            </div>
+            <div class="post-body">
+                <p th:text="${post.getBody()}"></p>
+            </div>
+            <div class="likes-container">
+                <button class="like-button" th:id="${'like-' + post.getId()}"><img src="" alt="like-icon"></button>
+                <h5 th:text="${post.getRating()}" class="likes">0</h5>
+            </div>
+            <div class="comments outline">
+                <div th:each="comment : ${post.getTopComments()}" class="comment">
+                    <h5 class="username"><a th:href="${'/users/' + post.getUser().getId()}" th:text="${post.getUser().getUsername()}"></a></h5>
+                    <p th:text="${comment.getBody()}"></p>
+                </div>
             </div>
         </div>
     </div>
 </div>
+<script>
+    let likes = $(".like-button");
+    likes.forEach(function (like) {
+        like.addEventListener("click", function () {
+            likePost(like.attr("id"));
+        })
+    })
+</script>
 </body>
 </html>
