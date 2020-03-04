@@ -118,4 +118,14 @@ public class Post {
     public void setUser_id(Long user_id) {
         this.user_id = user_id;
     }
+
+    public int getRating(){
+        int temp = 0;
+        if (this.rates != null) {
+            for (RatePost r : this.rates) {
+                temp += r.getValue();
+            }
+        }
+        return temp;
+    }
 }

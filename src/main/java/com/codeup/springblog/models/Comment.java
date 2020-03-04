@@ -25,8 +25,8 @@ public class Comment {
     @JoinColumn(name = "post_id", insertable = false, updatable = false)
     private Post post;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "comment")
-    private List<Rate> rates;
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "comment")
+//    private List<Rate> rates;
 
     public Post getPost() {
         return this.post;

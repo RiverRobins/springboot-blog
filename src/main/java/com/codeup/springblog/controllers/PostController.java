@@ -102,6 +102,6 @@ public class PostController {
     @PostMapping(path = "/posts/{postId}/like")
     public String like(@PathVariable String postId, @PathVariable String commentId){
         commentsDoa.deleteById(Long.parseLong(commentId));
-        return "redirect:/posts/" + postId + "/edit";
+        return "redirect:/posts/" + postId + "";
     }
 }
