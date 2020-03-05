@@ -43,7 +43,7 @@
                 data: {
                     id: postId
                 },
-                success: function () {
+                success: function (n) {
                     console.log("Post with id of " + postId + " liked!");
                 }
             })
@@ -62,7 +62,7 @@
                 <p th:text="${post.getBody()}"></p>
             </div>
             <div class="likes-container">
-                <button class="like-button" th:id="${'like-' + post.getId()}"><img src="" alt="like-icon"></button>
+<!--                <button class="like-button" th:id="${'like-' + post.getId()}"><img src="" alt="like-icon"></button>-->
                 <h5 th:text="${post.getRating()}" class="likes">0</h5>
             </div>
             <div class="comments outline">
@@ -74,13 +74,14 @@
         </div>
     </div>
 </div>
-<script>
-    let likes = $(".like-button");
-    likes.forEach(function (like) {
-        like.addEventListener("click", function () {
-            likePost(like.attr("id"));
-        })
-    })
-</script>
+<!--<script>-->
+<!--    // let likes = $(".like-button");-->
+<!--    // for (let i = 0; i < likes.length; i++) {-->
+<!--    //     likes[i].addEventListener("click", function () {-->
+<!--    //        -->
+<!--    //         // likePost(parseInt(likes[i].attr("id".substr(5))));-->
+<!--    //     })-->
+<!--    // }-->
+<!--</script>-->
 </body>
 </html>

@@ -11,6 +11,10 @@ public class RatePost extends Rate {
     private Long id;
     @Column(nullable = false)
     private Byte value = 0;
+    @Column(nullable = false)
+    private Long post_id;
+    @Column(nullable = false)
+    private Long user_id;
 
     @ManyToOne
     @JoinColumn(name = "user_id", insertable = false, updatable = false)
@@ -33,6 +37,19 @@ public class RatePost extends Rate {
         this.value = value;
         this.user = user;
         this.post = post;
+    }
+
+    public RatePost(Byte value, Long user_id, Long post_id) {
+        this.value = value;
+        this.post_id = post_id;
+        this.user_id = user_id;
+    }
+
+    public RatePost(Long id, Byte value, Long user_id, Long post_id) {
+        this.id = id;
+        this.value = value;
+        this.post_id = post_id;
+        this.user_id = user_id;
     }
 
     public Long getId() {
@@ -65,5 +82,21 @@ public class RatePost extends Rate {
 
     public void setPost(Post post) {
         this.post = post;
+    }
+
+    public Long getPost_id() {
+        return post_id;
+    }
+
+    public void setPost_id(Long post_id) {
+        this.post_id = post_id;
+    }
+
+    public Long getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(Long user_id) {
+        this.user_id = user_id;
     }
 }

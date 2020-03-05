@@ -3,6 +3,7 @@ package com.codeup.springblog.controllers;
 import com.codeup.springblog.models.*;
 import com.codeup.springblog.repositories.Comments;
 import com.codeup.springblog.repositories.Posts;
+import com.codeup.springblog.repositories.RatePosts;
 import com.codeup.springblog.repositories.Users;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -22,13 +23,16 @@ public class PostController {
 
     private final EmailSvc emailSvc;
 
+    private final RatePosts ratesDoa;
+
     private final Doggo doggo = new Doggo();
 
-    public PostController(Posts pDoa, Users usersDoa, Comments commentsDoa, EmailSvc emailService) {
-        this.emailSvc = emailService;
+    public PostController(Posts pDoa, Users usersDoa, Comments commentsDoa, EmailSvc emailSvc, RatePosts ratesDoa) {
         this.pDoa = pDoa;
         this.usersDoa = usersDoa;
         this.commentsDoa = commentsDoa;
+        this.emailSvc = emailSvc;
+        this.ratesDoa = ratesDoa;
     }
 
     @GetMapping(path = "/")
@@ -100,8 +104,10 @@ public class PostController {
     }
 
     @PostMapping(path = "/posts/{postId}/like")
-    public String like(@PathVariable String postId, @PathVariable String commentId){
-        commentsDoa.deleteById(Long.parseLong(commentId));
-        return "redirect:/posts/" + postId + "";
+    public String like(@PathVariable String postId){
+        User cUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        RatePost temp = new RatePost((byte) 1, cUser.getId(), Long.parseLong(postId));
+        ratesDoa.save(temp);
+        return "redirect:/posts/" + postId;
     }
 }

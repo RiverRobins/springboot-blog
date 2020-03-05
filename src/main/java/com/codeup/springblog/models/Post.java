@@ -119,6 +119,14 @@ public class Post {
         this.user_id = user_id;
     }
 
+    public List<RatePost> getRates() {
+        return rates;
+    }
+
+    public void setRates(List<RatePost> rates) {
+        this.rates = rates;
+    }
+
     public int getRating(){
         int temp = 0;
         if (this.rates != null) {
