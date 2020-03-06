@@ -32,10 +32,17 @@ public class CommentController {
 //    }
 
     @PostMapping(path = "/posts/{id}/comment")
-    public String createPost(Model model, @PathVariable(name = "id") String postId, @RequestParam(name = "body") String body) {
+    public String comment(Model model, @PathVariable(name = "id") String postId, @RequestParam(name = "body") String body) {
         User cUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Comment temp = new Comment(body, usersDoa.getOne(cUser.getId()), pDoa.getOne(Long.parseLong(postId)));
         commentsDoa.save(temp);
         return "redirect:/posts/" + postId;
     }
+    @PostMapping(path = "/posts/{id}/comment/{commentId}/like")
+    public String likeCom(Model model, @PathVariable(name = "id") String postId, @PathVariable(name = "commentId") String id) {
+        User cUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        return "redirect:/posts/" + postId;
+    }
+
 }

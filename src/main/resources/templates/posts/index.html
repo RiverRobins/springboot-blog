@@ -51,6 +51,17 @@
     </script>
 </head>
 <body>
+<div class="navbar">
+    <nav>
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </nav>
+</div>
 <div id="posts">
     <div th:each="post : ${posts}" class="post-container outline">
         <div class="post" th:id="${'post-'+ post.getId()}">
