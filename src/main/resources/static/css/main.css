@@ -1,3 +1,19 @@
+body{
+    background-color: #30386b;
+    margin: 0;
+    padding: 0;
+}
+
+h5, h6{
+    margin: 0;
+    padding: 0px 0px 0px 5px;
+}
+
+a {
+    color: #dadada;
+    text-decoration: underline;
+}
+
 #posts {
     position: center;
     display: flex;
@@ -6,18 +22,34 @@
     margin: 0;
     padding: 15%;
 }
+
 .outline{
     border: 1px solid lightgray;
+    border-radius: 5px;
 }
 .outline-top{
     border-top: 1px solid lightgray;
 }
+.post{
+    color: white;
+}
 .post-container{
-    margin: 5px 5px 5px 5px; /*TRBL*/
+    margin: 5px 5px 5px 5px; /*Top-Right-Bottom-Left*/
     padding: 5px;
 }
 .post-head{
     font-weight: bold;
+    /*padding-left: 10px;*/
+    /*padding-right: 10px;*/
+}
+/*.username{*/
+/*    */
+/*}*/
+.comments{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
 }
 .comment{
     margin-left: 10%;
@@ -28,12 +60,14 @@
     color: #404040;
 }
 .username , .email {
+    height: 18px;
+    width: auto;
     justify-self: left;
-    color: black;
     border-radius: 8px;
-    border: 1px solid cadetblue;
-    background-color: cadetblue;
-    size: auto;
+    border: 1px solid white;
+    display: flex;
+    margin: 0;
+    padding: 0;
 }
 .profile-head{
     position: center;
@@ -41,4 +75,13 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+}
+.likes-container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.like-button{
+    height: 10px;
+    width: 10px;
 }

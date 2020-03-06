@@ -66,8 +66,8 @@
     <div th:each="post : ${posts}" class="post-container outline">
         <div class="post" th:id="${'post-'+ post.getId()}">
             <div class="post-head">
-                <h5 class="username"><a th:href="${'/users/' + post.getUser().getId()}" th:text="${post.getUser().getUsername()}"></a></h5>
-                <h3><a th:href="${'/posts/' + post.getId()}" th:text="${post.getTitle()}"></a></h3>
+                <div class="username"><h5><a th:href="${'/users/' + post.getUser().getId()}" th:text="${post.getUser().getUsername()}"></a></h5></div>
+                <div class="title"><h3><a th:href="${'/posts/' + post.getId()}" th:text="${post.getTitle()}"></a></h3></div>
             </div>
             <div class="post-body">
                 <p th:text="${post.getBody()}"></p>
