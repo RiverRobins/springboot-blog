@@ -1,5 +1,6 @@
 body{
-    background-color: #30386b;
+    /*background-color: #30386b;*/
+    background-color: #404040;
     margin: 0;
     padding: 0;
 }
@@ -25,7 +26,7 @@ a {
 
 .outline{
     border: 1px solid lightgray;
-    border-radius: 5px;
+    border-radius: 8px;
 }
 .outline-top{
     border-top: 1px solid lightgray;
@@ -36,6 +37,8 @@ a {
 .post-container{
     margin: 5px 5px 5px 5px; /*Top-Right-Bottom-Left*/
     padding: 5px;
+    background-color: #30386b;
+
 }
 .post-head{
     font-weight: bold;
@@ -57,14 +60,12 @@ a {
     flex-wrap: wrap;
     flex-direction: column;
     justify-content: center;
-    color: #404040;
+    /*color: #404040;*/
 }
 .username , .email {
     height: 18px;
     width: auto;
     justify-self: left;
-    border-radius: 8px;
-    border: 1px solid white;
     display: flex;
     margin: 0;
     padding: 0;

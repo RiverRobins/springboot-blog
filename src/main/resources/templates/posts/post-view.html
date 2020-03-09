@@ -14,16 +14,16 @@
     <div class="post-body">
         <p th:text="${post.getBody()}"></p>
     </div>
+    <div class="likes-container">
+        <form th:action="${'/posts/'+ post.getId() +'/like'}" method="post"><button class="like-button" th:id="${'like-' + post.getId()}"><img src="" alt="like-icon"></button></form>
+        <h5 th:text="${post.getRating()}" class="likes"></h5>
+    </div>
     <div sec:authorize="isAuthenticated()">
         <form th:action='${"/posts/" +post.getId()+ "/comment"}' method="POST">
             <label for="body">Leave a comment</label>
             <input id="body" name="body" type="text" placeholder="Enter comment here">
             <button type="submit">Post Comment</button>
         </form>
-    </div>
-    <div class="likes-container">
-        <form th:action="${'/posts/'+ post.getId() +'/like'}" method="post"><button class="like-button" th:id="${'like-' + post.getId()}"><img src="" alt="like-icon"></button></form>
-        <h5 th:text="${post.getRating()}" class="likes"></h5>
     </div>
     <div class="comments outline">
         <div th:each="comment : ${post.getComments()}" class="comment">
