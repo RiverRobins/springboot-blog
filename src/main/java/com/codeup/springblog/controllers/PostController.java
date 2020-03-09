@@ -39,13 +39,13 @@ public class PostController {
     public String index(Model model) {
         List<Post> posts = Doggo.reverse(pDoa.findAll());
         model.addAttribute("posts", posts);
-        return "feed";
+        return "posts/feed";
     }
 
     @GetMapping(path = "/posts")
     public String posts(Model model) {
         model.addAttribute("posts", Doggo.reverse(pDoa.findAll()));
-        return "feed";
+        return "posts/feed";
     }
 
     @GetMapping(path = "/posts/{id}")
