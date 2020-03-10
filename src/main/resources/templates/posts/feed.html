@@ -54,11 +54,12 @@
 <div class="navbar">
     <nav>
         <ul>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
+            <li><a href="/posts">Home</a></li>
+            <li><a href="/posts">Explore</a></li>
+            <li><a href="/posts">Following</a></li>
+            <li sec:authorize="isAuthenticated()"><a href="">Profile</a></li>
+            <li sec:authorize="!isAuthenticated()"><a href="/logout">Logout</a></li>
+            <li sec:authorize="isAuthenticated()"><a href="/login">Login</a></li>
         </ul>
     </nav>
 </div>
