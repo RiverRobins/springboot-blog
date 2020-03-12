@@ -25,8 +25,8 @@ public class Comment {
     @JoinColumn(name = "post_id", insertable = false, updatable = false)
     private Post post;
 
-//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "comment")
-//    private List<Rate> rates;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "comment")
+    private List<RateComment> rates;
 
     public Post getPost() {
         return this.post;
@@ -83,5 +83,35 @@ public class Comment {
 
     public String getBody() {
         return body;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setPost_id(Long post_id) {
+        this.post_id = post_id;
+    }
+
+    public void setUser_id(Long user_id) {
+        this.user_id = user_id;
+    }
+
+    public List<RateComment> getRates() {
+        return rates;
+    }
+
+    public void setRates(List<RateComment> rates) {
+        this.rates = rates;
+    }
+
+    public int getRating(){
+        int temp = 0;
+        if (this.rates != null) {
+            for (RateComment r : this.rates) {
+                temp += r.getValue();
+            }
+        }
+        return temp;
     }
 }

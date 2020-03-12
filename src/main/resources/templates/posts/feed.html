@@ -51,18 +51,7 @@
     </script>
 </head>
 <body>
-<div class="navbar">
-    <nav>
-        <ul>
-            <li><a href="/posts">Home</a></li>
-            <li><a href="/posts">Explore</a></li>
-            <li><a href="/posts">Following</a></li>
-            <li sec:authorize="isAuthenticated()"><a href="">Profile</a></li>
-            <li sec:authorize="!isAuthenticated()"><a href="/logout">Logout</a></li>
-            <li sec:authorize="isAuthenticated()"><a href="/login">Login</a></li>
-        </ul>
-    </nav>
-</div>
+<div th:replace="partials/fragment.html :: nav"></div>
 <div id="posts">
     <div th:each="post : ${posts}" class="post-container outline">
         <div class="post outline" th:id="${'post-'+ post.getId()}">
