@@ -6,15 +6,13 @@
 </head>
 <body>
 <div th:fragment="nav" class="navbar">
-    <nav>
-        <ul class="nav-list">
-            <li class="nav-tab"><a href="/posts">Home</a></li>
-            <li class="nav-tab"><a href="/posts">Explore</a></li>
-            <li class="nav-tab"><a href="/posts">Following</a></li>
-            <li class="nav-tab profile" sec:authorize="isAuthenticated()"><a href="">Profile</a></li>
-            <li class="nav-tab logout" sec:authorize="!isAuthenticated()"><a href="/logout">Logout</a></li>
-            <li class="nav-tab login" sec:authorize="isAuthenticated()"><a href="/login">Login</a></li>
-        </ul>
+    <nav class="nav">
+        <span class="nav-tab"><a href="/posts">Home</a></span>
+        <span class="nav-tab"><a href="/posts">Explore</a></span>
+        <span class="nav-tab"><a href="/posts">Following</a></span>
+        <span class="nav-tab profile" sec:authorize="isAuthenticated()"><a href="">Profile</a></span>
+        <span class="nav-tab logout" sec:authorize="!isAuthenticated()"><a href="/logout">Logout</a></span>
+        <span class="nav-tab login" sec:authorize="isAuthenticated()"><a href="/login">Login</a></span>
     </nav>
 </div>
 
