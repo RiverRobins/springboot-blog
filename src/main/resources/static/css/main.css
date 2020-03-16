@@ -89,26 +89,41 @@ a {
 .navbar{
     display: flex;
     justify-content: center;
-    /*align-items: center;*/
+    align-items: center;
+
 }
 .nav{
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    width: 100%;
 }
 .nav-tab{
     height: 30px;
-    /*width: 1vw;*/
-    width: 50px;
+    /*width: 3fr;*/
+    width: 100px;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
     background-color: #404040;
-    /*color: #dadada;*/
+    color: #dadada;
+    margin-left: 0;
+}
+.user{
+    margin-left: auto;
+    margin-right: 0;
+}
+.nav-tab a {
+    height: available;
+    width: 100%;
 }
 .nav-tab:hover{
+    transition-duration: 1s;
     background-color: #dadada;
     color: #30386b;
+}
+.nav-tab:hover a {
     transition-duration: 1s;
+    /*background-color: #dadada;*/
+    color: #30386b;
 }
