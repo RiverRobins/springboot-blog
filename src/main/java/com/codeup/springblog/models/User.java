@@ -24,10 +24,24 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Post> comments;
 
+    @ManyToMany
+    @JoinTable(name="follow",
+            joinColumns=@JoinColumn(name="followingId"),
+            inverseJoinColumns=@JoinColumn(name="followerId")
+    )
+    private List<User> following;
+
+    @ManyToMany
+    @JoinTable(name="follow",
+            joinColumns=@JoinColumn(name="followerId"),
+            inverseJoinColumns=@JoinColumn(name="followingId")
+    )
+    private List<User> followers;
+
     public User(){}
 
     public User(User copy) {
-        id = copy.id; // This line is SUPER important! Many things won't work if it's absent
+        id = copy.id; //IMPORTANT!
         this.email = copy.email;
         this.username = copy.username;
         this.password = copy.password;
@@ -87,5 +101,37 @@ public class User {
 
     public void setBio(String bio) {
         this.bio = bio;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
+    }
+
+    public List<Post> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Post> comments) {
+        this.comments = comments;
+    }
+
+    public List<User> getFollowing() {
+        return following;
+    }
+
+    public void setFollowing(List<User> following) {
+        this.following = following;
+    }
+
+    public List<User> getFollowers() {
+        return followers;
+    }
+
+    public void setFollowers(List<User> followers) {
+        this.followers = followers;
     }
 }

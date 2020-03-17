@@ -12,6 +12,10 @@
                <h3 class="username" th:text="${user.getUsername()}"></h3>
                <h3 class="email" th:text="${user.getEmail()}"></h3>
             </div>
+            <div class="follow-container">
+                <p class="follow followers" th:text="${user.getFollowers().size()}"></p>
+                <p class="follow following" th:text="${user.getFollowing().size()}"></p>
+            </div>
             <div class="bio">
                 <p class="bio" th:text="${user.getBio()}"></p>
             </div>
