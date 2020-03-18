@@ -34,7 +34,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Posts</title>
-    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/static/css/main.css">
     <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
 <!--    <script>-->
 <!--        function likePost(postId) {-->
@@ -49,6 +49,7 @@
 <!--            })-->
 <!--        }-->
 <!--    </script>-->
+    <script src="js/ajax.js"></script>
 </head>
 <body>
 <div th:replace="partials/fragment.html :: nav"></div>
@@ -62,9 +63,18 @@
             <div class="post-body">
                 <p th:text="${post.getBody()}"></p>
             </div>
-            <div class="likes-container">
-<!--                <button class="like-button" th:id="${'like-' + post.getId()}"><img src="" alt="like-icon"></button>-->
+<!--            <div class="likes-container">-->
+<!--;               <button class="like-button" th:id="${'like-' + post.getId()}"><img src="" alt="like-icon"></button>&ndash;&gt;-->
+<!--                <h5 th:text="${post.getRating()}" class="likes">0</h5>-->
+<!--            </div>-->
+            <div class="info">
+                <form sec:authorize="isAuthenticated()" class="like like-post" th:action="${'/posts/' + post.getId() + '/like'}" method="post">
+                    <input type="hidden" name="postId" th:value="${post.getId()}">
+                    <input type="hidden" name="from" value="feed">
+                    <button class="like-button" th:id="${'like-' + post.getId().toString()}"><img src="" alt="like-icon"></button>
+                </form>
                 <h5 th:text="${post.getRating()}" class="likes">0</h5>
+                <p class="rating" th:text="${post.getRating()}"></p>
             </div>
             <div sec:authorize="isAuthenticated()">
                 <form th:action='${"/posts/" +post.getId()+ "/comment"}' method="POST">
@@ -75,8 +85,15 @@
             </div>
             <div class="comments outline-top">
                 <div th:each="comment : ${post.getTopComments()}" class="comment outline">
-                    <h5 class="username"><a th:href="${'/users/' + post.getUser().getId()}" th:text="${post.getUser().getUsername()}"></a></h5>
-                    <p th:text="${comment.getBody()}"></p>
+                    <div class="comment-head head">
+                        <h5 class="username"><a th:href="${'/users/' + post.getUser().getId()}" th:text="${post.getUser().getUsername()}"></a></h5>
+                    </div>
+                    <div class="comment-body body">
+                        <p th:text="${comment.getBody()}"></p>
+                    </div>
+                    <div class="info">
+                        <p class="rating" th:text="${comment.getRates().size()}"></p>
+                    </div>
                 </div>
             </div>
         </div>

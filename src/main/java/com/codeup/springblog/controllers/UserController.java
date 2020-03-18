@@ -57,4 +57,6 @@ public class UserController {
         model.addAttribute("user", usersDoa.getOne(Long.parseLong(id)));
         return "users/user-profile";
     }
+
+
 }
