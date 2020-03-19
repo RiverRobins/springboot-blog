@@ -49,7 +49,6 @@
 <!--            })-->
 <!--        }-->
 <!--    </script>-->
-    <script src="js/ajax.js"></script>
 </head>
 <body>
 <div th:replace="partials/fragment.html :: nav"></div>
@@ -63,15 +62,12 @@
             <div class="post-body">
                 <p th:text="${post.getBody()}"></p>
             </div>
-<!--            <div class="likes-container">-->
-<!--;               <button class="like-button" th:id="${'like-' + post.getId()}"><img src="" alt="like-icon"></button>&ndash;&gt;-->
-<!--                <h5 th:text="${post.getRating()}" class="likes">0</h5>-->
-<!--            </div>-->
             <div class="info">
-                <form sec:authorize="isAuthenticated()" class="like like-post" th:action="${'/posts/' + post.getId() + '/like'}" method="post">
-                    <input type="hidden" name="postId" th:value="${post.getId()}">
-                    <input type="hidden" name="from" value="feed">
-                    <button class="like-button" th:id="${'like-' + post.getId().toString()}"><img src="" alt="like-icon"></button>
+                <form sec:authorize="isAuthenticated()" class="like like-post" method="post">
+<!--                    th:action="${'/posts/' + post.getId() + '/like'}"-->
+                    <input type="hidden" class="id" name="postId" th:value="${post.getId()}">
+                    <input type="hidden" class="from" name="from" value="feed">
+                    <button class="like-button" th:id="${'like-' + post.getId().toString()}" type="button"><img src="" alt="like-icon"></button>
                 </form>
                 <h5 th:text="${post.getRating()}" class="likes">0</h5>
                 <p class="rating" th:text="${post.getRating()}"></p>
@@ -108,5 +104,6 @@
 <!--    //     })-->
 <!--    // }-->
 <!--</script>-->
+<script src="js/ajax.js"></script>
 </body>
 </html>
