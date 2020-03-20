@@ -103,9 +103,9 @@ public class PostController {
         return "redirect:/posts/" + postId + "/edit";
     }
 
-    @PostMapping(path = "/post/{id}/like")
-    public String likeD(@PathVariable(name = "id") String id){
-        String page = "redirect:/posts/" + id;
+//    @PostMapping(path = "/post/{id}/like")
+//    public String likeD(@PathVariable(name = "id") String id){
+//        String page = "redirect:/posts/" + id;
 //        try {
 //            switch (rate.getFrom()){
 //                case "view":
@@ -118,10 +118,10 @@ public class PostController {
 //        } catch (Exception e){
 //
 //        }
-        return page;
-    }
+//        return page;
+//    }
 
-    @RequestMapping(value = "/post/{id}/like", method = RequestMethod.POST)
+    @RequestMapping(value = "/posts/{id}/like", method = RequestMethod.POST)
     public void like(@PathVariable(name = "id") String postId, @RequestBody RateAjax rate /*@RequestParam(name = "post") String id, @RequestParam(name = "from") String from*/){
         User cUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         RatePost temp = new RatePost((byte) 1, cUser.getId(), rate.getId());
