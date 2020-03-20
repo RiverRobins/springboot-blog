@@ -104,25 +104,23 @@ public class PostController {
     }
 
     @PostMapping(path = "/posts/{postId}/like")
-    public String like(@PathVariable String postId, @RequestParam(name = "from") String from){
+    public void like(@PathVariable String postId, @RequestParam(name = "post") String id, @RequestParam(name = "from") String from){
         User cUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        RatePost temp = new RatePost((byte) 1, cUser.getId(), Long.parseLong(postId));
+        RatePost temp = new RatePost((byte) 1, cUser.getId(), Long.parseLong(id));
         ratesDoa.save(temp);
-        String page = "redirect:/posts/" + postId;
+        String page = "redirect:/posts/" + id;
         try {
             switch (from){
                 case "view":
-                    page = "redirect:/posts/" + postId;
+                    page = "redirect:/posts/" + id;
                     break;
                 case "feed":
                     page = "redirect:/posts";
                     break;
-//                default:
-//                    page = "redirect:/posts/" + postId;
             }
         } catch (Exception e){
-            System.out.println(e.getCause());
+
         }
-        return page;
+//        return page;
     }
 }

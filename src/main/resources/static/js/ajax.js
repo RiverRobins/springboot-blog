@@ -1,43 +1,33 @@
+let idToLike;
+
+$(function () {
+    var token = $("meta[name='_csrf']").attr("content");
+    var header = $("meta[name='_csrf_header']").attr("content");
+    $(document).ajaxSend(function(e, xhr, options) {
+        xhr.setRequestHeader(header, token);
+    });
+});
+
 $(".like-button").on("click", function () {
-    // console.dir($(this).parent().children()[0]);
-    const id = $(this).parent().children()[0].value;
-    const from = $(this).parent().children()[1].value;
-
-    console.log("post #" + id); //returns correct output
-    console.log("from page " + from); //returns correct output
-
-    $.ajax( "/posts/" + $(this).parent().children()[0].value + "/like", {
+    idToLike = $(this).parent().children()[0].value;
+    // const token = $("meta[name='_csrf']").attr("content");
+    // const header = $("meta[name='_csrf_header']").attr("content");
+    // xhr.setRequestHeader(header, token);
+    $.ajax( "/posts/" + idToLike + "/like", {
+        // url: ,
         type: "POST",
-        data: {
-            post: id,
-            from: from
-        },
+        dataType: 'json',
+        contentType: 'application/json',
+        data: JSON.stringify({
+            post: idToLike,
+            from: "feed"
+        }),
         success: function (data, status, xhr) {
             console.log("post liked!");
         },
-        // error: function (e) {
-        //     console.log(e)
-        // }
-
+        error: function (e) {
+            console.log("Id to like: " + idToLike);
+            console.log(e);
+        }
     });
-
-    // console.log("post #" + id);
-    // console.log("from page " + from);
-
-
 });
-// $(".like-button").addEventListener().click(function () {
-//     $.ajax( "/posts/" + this.getPropertyValue("id").substr(5) + "/like", {
-//         type: "POST",
-//         data: {
-//             post: this.getPropertyValue("id").substr(5),
-//             from: this.getPropertyValue("from")
-//         },
-//         success: function (data, status, xhr) {
-//
-//         },
-//         error: function () {
-//
-//         }
-//     });
-// });
