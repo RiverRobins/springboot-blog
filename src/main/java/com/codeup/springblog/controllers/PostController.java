@@ -122,10 +122,11 @@ public class PostController {
 //    }
 
     @RequestMapping(value = "/posts/{id}/like", method = RequestMethod.POST)
-    public void like(@PathVariable(name = "id") String postId, @RequestBody RateAjax rate /*@RequestParam(name = "post") String id, @RequestParam(name = "from") String from*/){
+    @ResponseBody
+    public String like(@PathVariable(name = "id") String postId, @RequestBody RateAjax rate /*@RequestParam(name = "post") String id, @RequestParam(name = "from") String from*/){
         User cUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        RatePost temp = new RatePost((byte) 1, cUser.getId(), rate.getId());
+        RatePost temp = new RatePost((byte) 1, cUser.getId(), Long.parseLong(postId)); //rate.getId()
         ratesDoa.save(temp);
-
+        return "";
     }
 }
