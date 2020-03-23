@@ -10,11 +10,7 @@ $(function () {
 
 $(".like-button").on("click", function () {
     idToLike = $(this).parent().children()[0].value;
-    // $(this).parent().parent().children()[2].innerHTML = "";
-
-    console.log($(this).parent().parent().children()[1].innerText);
     parseInt($(this).parent().parent().children()[1].innerText = (parseInt($(this).parent().parent().children()[1].innerText) + 1).toString());
-
     $.ajax( "/posts/" + idToLike + "/like", {
         // url: ,
         type: "POST",
