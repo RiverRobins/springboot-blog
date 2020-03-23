@@ -10,9 +10,11 @@ $(function () {
 
 $(".like-button").on("click", function () {
     idToLike = $(this).parent().children()[0].value;
-    // const token = $("meta[name='_csrf']").attr("content");
-    // const header = $("meta[name='_csrf_header']").attr("content");
-    // xhr.setRequestHeader(header, token);
+    // $(this).parent().parent().children()[2].innerHTML = "";
+
+    console.log($(this).parent().parent().children()[1].innerText);
+    parseInt($(this).parent().parent().children()[1].innerText = (parseInt($(this).parent().parent().children()[1].innerText) + 1).toString());
+
     $.ajax( "/posts/" + idToLike + "/like", {
         // url: ,
         type: "POST",
@@ -23,6 +25,7 @@ $(".like-button").on("click", function () {
             from: "feed"
         }),
         success: function (data, status, xhr) {
+
             console.log("post liked!");
         },
         error: function (e) {

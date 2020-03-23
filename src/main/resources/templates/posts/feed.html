@@ -71,8 +71,7 @@
                     <input type="hidden" class="from" name="from" value="feed">
                     <button class="like-button" th:id="${'like-' + post.getId().toString()}" type="button"><img src="" alt="like-icon"></button>
                 </form>
-                <h5 th:text="${post.getRating()}" class="likes">0</h5>
-                <p class="rating" th:text="${post.getRating()}"></p>
+                <p class="rating" th:text="${post.getRating()}">0</p>
             </div>
             <div sec:authorize="isAuthenticated()">
                 <form th:action='${"/posts/" +post.getId()+ "/comment"}' method="POST">
