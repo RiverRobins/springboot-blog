@@ -35,10 +35,19 @@ public class CommentController {
         return "redirect:/posts/" + postId;
     }
     @PostMapping(path = "/posts/{id}/comment/{commentId}/like")
-    public String likeCom(@PathVariable(name = "id") String postId, @PathVariable(name = "commentId") String id) {
+    @ResponseBody
+    public String like(@PathVariable(name = "commentId") String commentId){
         User cUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        RateComment temp = new RateComment((byte) 1, cUser.getId(), Long.parseLong(postId));
+        RateComment temp = new RateComment((byte) 1, cUser.getId(), Long.parseLong(commentId));
         ratesDoa.save(temp);
-        return "redirect:/posts/" + postId;
+        return "";
     }
+
+
+//    public String likeCom(@PathVariable(name = "id") String postId, @PathVariable(name = "commentId") String id) {
+//        User cUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        RateComment temp = new RateComment((byte) 1, cUser.getId(), Long.parseLong(postId));
+//        ratesDoa.save(temp);
+//        return "redirect:/posts/" + postId;
+//    }
 }

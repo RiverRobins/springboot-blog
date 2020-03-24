@@ -30,3 +30,26 @@ $(".like-button").on("click", function () {
         }
     });
 });
+
+$(".like-comment").on("click", function () {
+    idToLike = $(this).parent().children()[0].value;
+    parseInt($(this).parent().parent().children()[1].innerText = (parseInt($(this).parent().parent().children()[1].innerText) + 1).toString());
+    $.ajax( "/posts/" + idToLike + "/like", {
+        // url: ,
+        type: "POST",
+        dataType: 'json',
+        contentType: 'application/json',
+        data: JSON.stringify({
+            post: idToLike,
+            from: "feed"
+        }),
+        success: function (data, status, xhr) {
+
+            console.log("comment liked!");
+        },
+        error: function (e) {
+            console.log("Id to like: " + idToLike);
+            console.log(e);
+        }
+    });
+});
