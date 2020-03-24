@@ -26,7 +26,6 @@ public class CommentController {
         this.commentsDoa = commentsDoa;
         this.ratesDoa = rateComments;
     }
-
     @PostMapping(path = "/posts/{id}/comment")
     public String comment(@PathVariable(name = "id") String postId, @RequestParam(name = "body") String body) {
         User cUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -42,12 +41,4 @@ public class CommentController {
         ratesDoa.save(temp);
         return "";
     }
-
-
-//    public String likeCom(@PathVariable(name = "id") String postId, @PathVariable(name = "commentId") String id) {
-//        User cUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        RateComment temp = new RateComment((byte) 1, cUser.getId(), Long.parseLong(postId));
-//        ratesDoa.save(temp);
-//        return "redirect:/posts/" + postId;
-//    }
 }
