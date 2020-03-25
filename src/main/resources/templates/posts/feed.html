@@ -81,7 +81,8 @@
                             <button class="like-comment" th:id="${'like-' + comment.getId().toString()}" type="button"><img src="" alt="like-icon"></button>
                             <input type="hidden" name="postId" th:value="${post.getId()}">
                         </form>
-                        <p class="rating" th:text="${comment.getRating()}">0</p>                    </div>
+                        <p class="rating" th:text="${comment.getRating()}">0</p>
+                    </div>
                 </div>
             </div>
         </div>

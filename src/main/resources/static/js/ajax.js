@@ -10,7 +10,7 @@ $(function () {
 
 $(".like-button").on("click", function () {
     idToLike = $(this).parent().children()[0].value;
-    parseInt($(this).parent().parent().children()[1].innerText = (parseInt($(this).parent().parent().children()[1].innerText) + 1).toString());
+    $(this).parent().parent().children()[1].innerText = (parseInt($(this).parent().parent().children()[1].innerText) + 1).toString();
     $.ajax( "/posts/" + idToLike + "/like", {
         // url: ,
         type: "POST",
@@ -21,7 +21,6 @@ $(".like-button").on("click", function () {
             from: "feed"
         }),
         success: function (data, status, xhr) {
-
             console.log("post liked!");
         },
         error: function (e) {
@@ -32,9 +31,10 @@ $(".like-button").on("click", function () {
 });
 
 $(".like-comment").on("click", function () {
+    postId = $(this).parent().children()[3].value;
     idToLike = $(this).parent().children()[0].value;
     parseInt($(this).parent().parent().children()[1].innerText = (parseInt($(this).parent().parent().children()[1].innerText) + 1).toString());
-    $.ajax( "/posts/" + idToLike + "/like", {
+    $.ajax( "/posts/" + postId + "/comment/" + idToLike + "/like", {
         // url: ,
         type: "POST",
         dataType: 'json',
@@ -44,7 +44,6 @@ $(".like-comment").on("click", function () {
             from: "feed"
         }),
         success: function (data, status, xhr) {
-
             console.log("comment liked!");
         },
         error: function (e) {
