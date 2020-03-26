@@ -1,6 +1,7 @@
 package com.codeup.springblog.models;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -133,5 +134,13 @@ public class User {
 
     public void setFollowers(List<User> followers) {
         this.followers = followers;
+    }
+
+    public ArrayList<Post> getAllFollowingPosts(){
+        ArrayList<Post> all = new ArrayList<>();
+        for (User follow : this.following) {
+            all.addAll(follow.getPosts());
+        }
+        return all;
     }
 }

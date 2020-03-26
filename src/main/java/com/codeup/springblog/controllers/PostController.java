@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -92,6 +94,7 @@ public class PostController {
     public String createPost(@ModelAttribute Post temp) {
         User cUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         temp.setUser_id(cUser.getId());
+        temp.setDate(new Date());
         pDoa.save(temp);
 //        this.emailSvc.prepareAndSend(temp, "A new post was created!", temp.getTitle() + "\n" + temp.getBody());
         return "redirect:/posts";
@@ -110,5 +113,58 @@ public class PostController {
         RatePost temp = new RatePost((byte) 1, cUser.getId(), Long.parseLong(postId));
         ratesDoa.save(temp);
         return "";
+    }
+
+    @GetMapping(path = "/following")
+    public String following(Model model) {
+        User cUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        model.addAttribute("posts", processPosts(cUser.getAllFollowingPosts(), 25));
+        return "posts/feed";
+    }
+
+
+    private ArrayList<Post> processPosts(ArrayList<Post> posts, int amount){
+        ArrayList<Post> sorted = new ArrayList<>();
+        ArrayList<Post> temp = posts;
+        while (temp.size() > 0){
+            sorted.add(temp.get(indexOfNewest(temp)));
+            temp.remove((int) indexOfNewest(temp));
+        }
+        sorted = doggo.reverse(sorted);
+        int limit = Math.min(sorted.size(), amount);
+        return (ArrayList<Post>) sorted.subList(0, limit);
+    }
+
+    private ArrayList<Post> processPosts(ArrayList<Post> posts, int start, int end){
+        ArrayList<Post> sorted = new ArrayList<>();
+        ArrayList<Post> temp = posts;
+        while (temp.size() > 0){
+            sorted.add(temp.get(indexOfNewest(temp)));
+            temp.remove((int) indexOfNewest(temp));
+        }
+        sorted = doggo.reverse(sorted);
+//        int limit = Math.min(sorted.size(), amount);
+//        return (ArrayList<Post>) sorted.subList(0, limit);
+        return sorted;
+    }
+
+    private ArrayList<Post> processPosts(ArrayList<Post> temp){
+        ArrayList<Post> sorted = new ArrayList<>();
+        while (temp.size() > 0){
+            sorted.add(temp.get(indexOfNewest(temp)));
+            temp.remove((int) indexOfNewest(temp));
+        }
+        sorted = doggo.reverse(sorted);
+        return sorted;
+    }
+
+    private Integer indexOfNewest(ArrayList<Post> posts){
+        int temp = 0;
+        for(int i = 0; i < posts.size(); i++){
+            if (posts.get(i).getDate().compareTo(posts.get(temp).getDate()) < 0){
+                temp = i;
+            }
+        }
+        return temp;
     }
 }

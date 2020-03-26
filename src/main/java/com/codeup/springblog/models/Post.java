@@ -2,6 +2,7 @@ package com.codeup.springblog.models;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -21,6 +22,9 @@ public class Post {
     @Column(nullable = false)
     private Long user_id;
 
+    @Column(nullable = false)
+    private Date date;
+
     @ManyToOne
     @JoinColumn(name = "user_id", insertable = false, updatable = false)
     private User user;
@@ -39,11 +43,12 @@ public class Post {
         this.body = body;
     }
 
-    public Post(Long id, String title, String body, Long user_id) {
-        this.id = id;
-        this.user_id = user_id;
+    public Post(String title, String body, Long user_id, Date date, User user) {
         this.title = title;
         this.body = body;
+        this.user_id = user_id;
+        this.date = date;
+        this.user = user;
     }
 
     public Post(String title, String body, User user) {
@@ -125,6 +130,18 @@ public class Post {
 
     public void setRates(List<RatePost> rates) {
         this.rates = rates;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public int getRating(){

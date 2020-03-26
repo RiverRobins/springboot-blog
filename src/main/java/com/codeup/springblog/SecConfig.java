@@ -43,7 +43,7 @@ public class SecConfig extends WebSecurityConfigurerAdapter {
                 /* Logout configuration */
                 .and()
                 .logout()
-                .logoutSuccessUrl("/login?logout") // append a query string value
+                .logoutSuccessUrl("/posts") // append a query string value   /login?logout
                 /* Pages that can be viewed without having to log in */
                 .and()
                 .authorizeRequests()
