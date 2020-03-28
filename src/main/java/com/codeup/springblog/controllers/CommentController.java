@@ -33,7 +33,7 @@ public class CommentController {
         commentsDoa.save(temp);
         return "redirect:/posts/" + postId;
     }
-    @PostMapping(path = "/posts/{id}/comment/{commentId}/like")
+    @PostMapping(path = "/posts/{id}/comment/{commentId}/like/{from}")
     @ResponseBody
     public String like(@PathVariable(name = "commentId") String commentId){
         User cUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();

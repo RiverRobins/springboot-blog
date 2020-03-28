@@ -10,9 +10,9 @@ $(function () {
 
 $(".like-button").on("click", function () {
     idToLike = $(this).parent().children()[0].value;
+    from = $(this).parent().children()[2].value;
     $(this).parent().parent().children()[1].innerText = (parseInt($(this).parent().parent().children()[1].innerText) + 1).toString();
-    $.ajax( "/posts/" + idToLike + "/like", {
-        // url: ,
+    $.ajax( "/posts/" + idToLike + "/like/" + from, {
         type: "POST",
         dataType: 'json',
         contentType: 'application/json',
@@ -32,10 +32,10 @@ $(".like-button").on("click", function () {
 
 $(".like-comment").on("click", function () {
     postId = $(this).parent().children()[3].value;
+    from = $(this).parent().children()[1].value;
     idToLike = $(this).parent().children()[0].value;
     parseInt($(this).parent().parent().children()[1].innerText = (parseInt($(this).parent().parent().children()[1].innerText) + 1).toString());
-    $.ajax( "/posts/" + postId + "/comment/" + idToLike + "/like", {
-        // url: ,
+    $.ajax( "/posts/" + postId + "/comment/" + idToLike + "/like/" + from, {
         type: "POST",
         dataType: 'json',
         contentType: 'application/json',

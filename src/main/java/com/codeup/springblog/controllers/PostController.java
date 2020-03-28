@@ -39,14 +39,15 @@ public class PostController {
 
     @GetMapping(path = "/")
     public String index(Model model) {
-        List<Post> posts = Doggo.reverse(pDoa.findAll());
-        model.addAttribute("posts", posts);
+        model.addAttribute("posts", Doggo.reverse(pDoa.findAll()));
+        model.addAttribute("from", "home");
         return "posts/feed";
     }
 
     @GetMapping(path = "/posts")
     public String posts(Model model) {
         model.addAttribute("posts", Doggo.reverse(pDoa.findAll()));
+        model.addAttribute("from", "feed");
         return "posts/feed";
     }
 
@@ -106,7 +107,7 @@ public class PostController {
         return "redirect:/posts/" + postId + "/edit";
     }
 
-    @RequestMapping(value = "/posts/{id}/like", method = RequestMethod.POST)
+    @RequestMapping(value = "/posts/{id}/like/{from}", method = RequestMethod.POST)
     @ResponseBody
     public String like(@PathVariable(name = "id") String postId){
         User cUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -119,6 +120,7 @@ public class PostController {
     public String following(Model model) {
         User cUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         model.addAttribute("posts", processPosts(cUser.getAllFollowingPosts(), 25));
+        model.addAttribute("from", "following");
         return "posts/feed";
     }
 
