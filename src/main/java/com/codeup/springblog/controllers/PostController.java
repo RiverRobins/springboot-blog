@@ -118,7 +118,7 @@ public class PostController {
 
     @GetMapping(path = "/following")
     public String following(Model model) {
-        User cUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User cUser = usersDoa.getOne(((User)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId());
         model.addAttribute("posts", processPosts(cUser.getAllFollowingPosts(), 25));
         model.addAttribute("from", "following");
         return "posts/feed";
@@ -133,8 +133,10 @@ public class PostController {
             temp.remove((int) indexOfNewest(temp));
         }
         sorted = doggo.reverse(sorted);
-        int limit = Math.min(sorted.size(), amount);
-        return (ArrayList<Post>) sorted.subList(0, limit);
+        for (int i = 0; i < Math.min(sorted.size(), amount); i++) {
+            temp.add(sorted.get(i));
+        }
+        return temp;
     }
 
     private ArrayList<Post> processPosts(ArrayList<Post> posts, int start, int end){
