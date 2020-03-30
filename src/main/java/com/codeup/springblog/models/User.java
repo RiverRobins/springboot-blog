@@ -150,7 +150,6 @@ public class User {
 //        return all;
 //    }
 
-
     public List<Follow> getFollowing() {
         return following;
     }
