@@ -39,6 +39,12 @@ public class User {
     )
     private List<User> followers;
 
+//    @OneToMany(mappedBy = "followers")
+//    private List<User> following;
+//
+//    @OneToMany(mappedBy = "following")
+//    private List<User> followers;
+
     public User(){}
 
     public User(User copy) {

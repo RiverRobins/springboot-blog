@@ -27,6 +27,8 @@ public class PostController {
 
     private final RatePosts ratesDoa;
 
+
+
     private final Doggo doggo = new Doggo();
 
     public PostController(Posts pDoa, Users usersDoa, Comments commentsDoa, EmailSvc emailSvc, RatePosts ratesDoa) {
@@ -113,6 +115,14 @@ public class PostController {
         User cUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         RatePost temp = new RatePost((byte) 1, cUser.getId(), Long.parseLong(postId));
         ratesDoa.save(temp);
+        return "";
+    }
+
+    @RequestMapping(value = "/follow/{userId}", method = RequestMethod.POST)
+    @ResponseBody
+    public String follow(@PathVariable(name = "userId") String userId){
+        User cUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
         return "";
     }
 
