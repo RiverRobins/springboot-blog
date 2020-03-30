@@ -25,25 +25,25 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Post> comments;
 
-    @ManyToMany
-    @JoinTable(name="follow",
-            joinColumns=@JoinColumn(name="followingId"),
-            inverseJoinColumns=@JoinColumn(name="followerId")
-    )
-    private List<User> following;
-
-    @ManyToMany
-    @JoinTable(name="follow",
-            joinColumns=@JoinColumn(name="followerId"),
-            inverseJoinColumns=@JoinColumn(name="followingId")
-    )
-    private List<User> followers;
-
-//    @OneToMany(mappedBy = "followers")
+//    @ManyToMany
+//    @JoinTable(name="follow",
+//            joinColumns=@JoinColumn(name="followingId"),
+//            inverseJoinColumns=@JoinColumn(name="followerId")
+//    )
 //    private List<User> following;
 //
-//    @OneToMany(mappedBy = "following")
+//    @ManyToMany
+//    @JoinTable(name="follow",
+//            joinColumns=@JoinColumn(name="followerId"),
+//            inverseJoinColumns=@JoinColumn(name="followingId")
+//    )
 //    private List<User> followers;
+
+    @OneToMany(mappedBy = "follower")
+    private List<Follow> followers;
+
+    @OneToMany(mappedBy = "following")
+    private List<Follow> following;
 
     public User(){}
 
@@ -126,27 +126,53 @@ public class User {
         this.comments = comments;
     }
 
-    public List<User> getFollowing() {
+//    public List<User> getFollowing() {
+//        return following;
+//    }
+//
+//    public void setFollowing(List<User> following) {
+//        this.following = following;
+//    }
+//
+//    public List<User> getFollowers() {
+//        return followers;
+//    }
+//
+//    public void setFollowers(List<User> followers) {
+//        this.followers = followers;
+//    }
+//
+//    public ArrayList<Post> getAllFollowingPosts(){
+//        ArrayList<Post> all = new ArrayList<>();
+//        for (User follow : this.following) {
+//            all.addAll(follow.getPosts());
+//        }
+//        return all;
+//    }
+
+
+    public List<Follow> getFollowing() {
         return following;
     }
 
-    public void setFollowing(List<User> following) {
+    public void setFollowing(List<Follow> following) {
         this.following = following;
     }
 
-    public List<User> getFollowers() {
+    public List<Follow> getFollowers() {
         return followers;
     }
 
-    public void setFollowers(List<User> followers) {
+    public void setFollowers(List<Follow> followers) {
         this.followers = followers;
     }
 
     public ArrayList<Post> getAllFollowingPosts(){
         ArrayList<Post> all = new ArrayList<>();
-        for (User follow : this.following) {
-            all.addAll(follow.getPosts());
+        for (Follow follow : this.following) {
+            all.addAll(follow.getFollowing().getPosts());
         }
         return all;
     }
+
 }
