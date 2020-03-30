@@ -1,10 +1,7 @@
 package com.codeup.springblog.controllers;
 
 import com.codeup.springblog.models.*;
-import com.codeup.springblog.repositories.Comments;
-import com.codeup.springblog.repositories.Posts;
-import com.codeup.springblog.repositories.RatePosts;
-import com.codeup.springblog.repositories.Users;
+import com.codeup.springblog.repositories.*;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,16 +24,17 @@ public class PostController {
 
     private final RatePosts ratesDoa;
 
-
+    private final Follows followDoa;
 
     private final Doggo doggo = new Doggo();
 
-    public PostController(Posts pDoa, Users usersDoa, Comments commentsDoa, EmailSvc emailSvc, RatePosts ratesDoa) {
+    public PostController(Posts pDoa, Users usersDoa, Comments commentsDoa, EmailSvc emailSvc, RatePosts ratesDoa, Follows followDoa) {
         this.pDoa = pDoa;
         this.usersDoa = usersDoa;
         this.commentsDoa = commentsDoa;
         this.emailSvc = emailSvc;
         this.ratesDoa = ratesDoa;
+        this.followDoa = followDoa;
     }
 
     @GetMapping(path = "/")
@@ -122,7 +120,8 @@ public class PostController {
     @ResponseBody
     public String follow(@PathVariable(name = "userId") String userId){
         User cUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
+        User userToFollow = usersDoa.getOne(Long.parseLong(userId));
+        followDoa.save(new Follow(cUser, userToFollow));
         return "";
     }
 
