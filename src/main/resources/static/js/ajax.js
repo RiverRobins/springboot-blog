@@ -8,23 +8,21 @@ $(function () {
     });
 });
 
-$(".follow").on("click", function () {
-    idToLike = $(this).parent().children()[0].value;
-    from = $(this).parent().children()[2].value;
-    $(this).parent().parent().children()[1].innerText = (parseInt($(this).parent().parent().children()[1].innerText) + 1).toString();
-    $.ajax( "/posts/" + idToLike + "/like/" + from, {
+$(".follow-button").on("click", function () {
+    idToFollow = $(this).parent().children()[0].value;
+    from = $(this).parent().children()[1].value;
+    $.ajax( "/follow/" + idToFollow, {
         type: "POST",
         dataType: 'json',
         contentType: 'application/json',
         data: JSON.stringify({
-            post: idToLike,
-            from: "feed"
+            user: idToFollow,
+            from: from
         }),
         success: function (data, status, xhr) {
-            console.log("post liked!");
+            console.log("User Followed!");
         },
         error: function (e) {
-            console.log("Id to like: " + idToLike);
             console.log(e);
         }
     });
