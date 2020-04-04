@@ -121,7 +121,11 @@ public class PostController {
     public String follow(@PathVariable(name = "userId") String userId){
         User cUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User userToFollow = usersDoa.getOne(Long.parseLong(userId));
-        followDoa.save(new Follow(cUser, userToFollow));
+        Follow fol = new Follow(cUser, userToFollow);
+        if (fol.getId() == null){
+            fol.setId(1L);
+        }
+        followDoa.save(fol);
         return "";
     }
 
