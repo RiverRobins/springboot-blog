@@ -54,6 +54,7 @@ public class PostController {
     @GetMapping(path = "/posts/{id}")
     public String post(@PathVariable String id, Model model) {
         model.addAttribute("post", pDoa.getOne(Long.parseLong(id)));
+        model.addAttribute("from", "feed");
         return "posts/post-view";
     }
 

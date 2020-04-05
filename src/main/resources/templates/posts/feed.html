@@ -15,7 +15,7 @@
         <div class="post outline" th:id="${'post-'+ post.getId()}">
             <div class="post-head">
                 <div class="username"><h5><a th:href="${'/users/' + post.getUser().getId()}" th:text="${post.getUser().getUsername()}"></a></h5></div>
-                <div class="follow">
+                <div class="follow" th:if="${!from.equalsIgnoreCase('following')}">
                     <form action="" sec:authorize="isAuthenticated()">
                         <input type="hidden" name="user-id" th:value="${post.getUser().getId()}">
                         <input type="hidden" name="from" th:value="${from}">
