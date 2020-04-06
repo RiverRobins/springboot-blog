@@ -127,3 +127,8 @@ img.like-button{
     /*background-color: #dadada;*/
     color: #30386b;
 }
+.center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

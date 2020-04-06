@@ -5,6 +5,7 @@
     <title>Post</title>
 <!--    <link rel="stylesheet" href="/static/css/main.css">-->
     <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/post-create.css">
 
 </head>
 <body>
@@ -22,15 +23,15 @@
 <div class="post-container outline">
     <form th:action='${"/posts/create"}' method="POST" th:object="${post}">
     <!--/*@thymesVar id="post" type="com.codeup.springblog.models.Post"*/-->
-        <div class="post outline" th:id="${'post-'+ post.getId()}">
-            <div class="post-head create">
-                <input id="title" th:field="*{title}" name="title" type="text" placeholder="Enter title here" class="title">
+        <div class="post outline" id="post">
+            <div class="post-head center">
+                <input id="title" class="title create" th:field="*{title}" name="title" type="text" placeholder="Enter title here">
             </div>
-            <div class="post-body create">
-                <textarea id="body" th:field="*{body}" name="body" placeholder="Enter body here" class=""></textarea>
+            <div class="post-body center">
+                <textarea id="body" class="create" th:field="*{body}" name="body" placeholder="Enter body here"></textarea>
             </div>
-            <div class="comments outline-top create">
-                <button type="submit">Create Post</button>
+            <div class="center">
+                <button id="submit" class="create" type="submit">Create Post</button>
             </div>
         </div>
     </form>

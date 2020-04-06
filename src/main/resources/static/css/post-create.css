@@ -1,0 +1,20 @@
+.create{
+    width: 80%;
+}
+.title{
+    height: 45px;
+}
+textarea {
+    height: 200px;
+    width: 80%;
+    resize: none;
+}
+button.create {
+    height: 50px;
+    width: 80%;
+}
+button.create:hover{
+    transition-duration: 1s;
+    color: #dadada;
+    background-color: #30386b;
+}
