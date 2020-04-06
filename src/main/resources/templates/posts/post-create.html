@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="/static/css/main.css">
 </head>
 <body>
+<div th:replace="partials/fragment.html :: nav"></div>
 <div class="post-container outline">
     <!--/*@thymesVar id="post" type="com.codeup.springblog.models.Post"*/-->
     <form th:action='${"/posts/create"}' method="POST" th:object="${post}">
