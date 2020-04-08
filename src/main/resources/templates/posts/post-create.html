@@ -13,7 +13,7 @@
     <form th:action='${"/posts/create"}' method="POST" th:object="${post}">
         <div class="post outline" id="post">
             <div class="post-head center">
-                <input id="title" class="title create" th:field="*{title}" name="title" type="text" placeholder="Enter title here">
+                <input id="title" class="title create" th:field="*{title}" name="title" type="text" placeholder="Enter title here" required>
             </div>
             <div class="post-body center">
                 <textarea id="body" class="create" th:field="*{body}" name="body" placeholder="Enter body here"></textarea>
@@ -24,5 +24,6 @@
         </div>
     </form>
 </div>
+<script src="js/create-post.js"></script>
 </body>
 </html>
