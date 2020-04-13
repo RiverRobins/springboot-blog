@@ -5,6 +5,7 @@ import com.codeup.springblog.repositories.Comments;
 import com.codeup.springblog.repositories.Posts;
 import com.codeup.springblog.repositories.RateComments;
 import com.codeup.springblog.repositories.Users;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -26,12 +27,15 @@ public class CommentController {
         this.commentsDoa = commentsDoa;
         this.ratesDoa = rateComments;
     }
-    @PostMapping(path = "/posts/{id}/comment")
+    @RequestMapping(path = "/posts/{id}/comment")
+    @ResponseBody
     public String comment(@PathVariable(name = "id") String postId, @RequestParam(name = "body") String body) {
+//        ObjectMapper m = new ObjectMapper();
         User cUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Comment temp = new Comment(body, usersDoa.getOne(cUser.getId()), pDoa.getOne(Long.parseLong(postId)));
         commentsDoa.save(temp);
-        return "redirect:/posts/" + postId;
+        return "";
+//        return "redirect:/posts/" + postId;
     }
     @PostMapping(path = "/posts/{id}/comment/{commentId}/like/{from}")
     @ResponseBody

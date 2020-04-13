@@ -2,6 +2,7 @@ package com.codeup.springblog.controllers;
 
 import com.codeup.springblog.models.*;
 import com.codeup.springblog.repositories.*;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -103,9 +104,11 @@ public class PostController {
     }
 
     @PostMapping(path = "/posts/{postId}/edit/delete-comment/{commentId}")
+    @ResponseBody
     public String deleteCom(@PathVariable String postId, @PathVariable String commentId){
         commentsDoa.deleteById(Long.parseLong(commentId));
-        return "redirect:/posts/" + postId + "/edit";
+        return "";
+//        return "redirect:/posts/" + postId + "/edit";
     }
 
     @RequestMapping(value = "/posts/{id}/like/{from}", method = RequestMethod.POST)
