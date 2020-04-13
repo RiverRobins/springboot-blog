@@ -29,10 +29,10 @@ public class CommentController {
     }
     @RequestMapping(path = "/posts/{id}/comment")
     @ResponseBody
-    public String comment(@PathVariable(name = "id") String postId, @RequestParam(name = "body") String body) {
+    public String comment(@RequestBody Comment comment, @PathVariable(name = "id") String postId) {
 //        ObjectMapper m = new ObjectMapper();
         User cUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Comment temp = new Comment(body, usersDoa.getOne(cUser.getId()), pDoa.getOne(Long.parseLong(postId)));
+        Comment temp = new Comment(comment.getBody(), usersDoa.getOne(cUser.getId()), pDoa.getOne(Long.parseLong(postId)));
         commentsDoa.save(temp);
         return "";
 //        return "redirect:/posts/" + postId;

@@ -1,6 +1,7 @@
 package com.codeup.springblog.models;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -26,7 +27,7 @@ public class Comment {
     private Post post;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "comment")
-    private List<RateComment> rates;
+    private List<RateComment> rates = new ArrayList<>();
 
     public Post getPost() {
         return this.post;

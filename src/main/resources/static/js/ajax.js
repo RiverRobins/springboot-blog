@@ -75,13 +75,15 @@ $(".like-comment").on("click", function () {
 $(".comment-button").on("click", function () {
    const postId = $(this).parent().children()[2].value;
    const body = $(this).parent().children()[1].value;
-    $.ajax( "/posts/" + postId + "/comment/", {
+    $.ajax( "/posts/" + postId + "/comment", {
         type: "POST",
-        dataType: 'json',
+        dataType: 'text',
         contentType: 'application/json',
         data: JSON.stringify({
-            post: postId,
-            body: body
+            // id: null,
+            body: body,
+            // post_id: postId,
+            // user_id: null
         }),
         success: function (data, status, xhr) {
             console.log("comment posted!");
