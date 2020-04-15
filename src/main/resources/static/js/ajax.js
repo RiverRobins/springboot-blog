@@ -75,7 +75,21 @@ $(".like-comment").on("click", function () {
 $(".comment-button").on("click", function () {
    const postId = $(this).parent().children()[2].value;
    const body = $(this).parent().children()[1].value;
-    // console.dir($(this).parent().children());
+   const html = `<div class="comment-head head">
+        <h5 class="username"><a href="${'/users/' + post.getUser().getId()}" th:text="${post.getUser().getUsername()}"></a></h5>
+    </div>
+    <div class="comment-body body">
+        <p th:text="${body}"></p>
+        </div>
+        <div class="info">
+        <form class="like like-post" method="post">
+        <button class="like-comment" type="button"><img src="" alt="like-icon"></button>
+        <input type="hidden" name="postId" value="${postId}">
+        </form>
+        <p class="rating" th:text="${comment.getRating()}">0</p>
+        </div>`;
+
+
     $.ajax( "/posts/" + postId + "/comment", {
         type: "POST",
         dataType: 'json',
