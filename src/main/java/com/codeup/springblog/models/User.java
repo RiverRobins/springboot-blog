@@ -1,5 +1,7 @@
 package com.codeup.springblog.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -166,6 +168,7 @@ public class User {
         this.followers = followers;
     }
 
+    @JsonIgnore
     public ArrayList<Post> getAllFollowingPosts(){
         ArrayList<Post> all = new ArrayList<>();
         for (Follow follow : this.following) {

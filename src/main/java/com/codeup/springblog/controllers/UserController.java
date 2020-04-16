@@ -4,6 +4,9 @@ import com.codeup.springblog.models.User;
 import com.codeup.springblog.repositories.Comments;
 import com.codeup.springblog.repositories.Posts;
 import com.codeup.springblog.repositories.Users;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -58,4 +61,11 @@ public class UserController {
         return "users/user-profile";
     }
 
+    @RequestMapping(path = "/users/get/current")
+    @ResponseBody
+    public String getUsername() throws JsonProcessingException {
+        User cUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        ObjectMapper m = new ObjectMapper();
+        return m.writeValueAsString(cUser);
+    }
 }
