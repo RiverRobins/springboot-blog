@@ -63,9 +63,8 @@ public class UserController {
 
     @RequestMapping(path = "/users/get/current")
     @ResponseBody
-    public String getUsername() throws JsonProcessingException {
-        User cUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        ObjectMapper m = new ObjectMapper();
-        return m.writeValueAsString(cUser);
+    public User getUsername() {
+        return  (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        return cUser;
     }
 }

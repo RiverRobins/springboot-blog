@@ -76,17 +76,27 @@ $(".comment-button").on("click", function () {
     const postId = $(this).parent().children()[2].value;
     const body = $(this).parent().children()[1].value;
     const addTo = $(this).parent().parent().parent().children()[4];
-    const userAjax = $.ajax("/users/get/current",{
-        dataType: "json",
-        success: function () {
-            const user = JSON.parse(userAjax);
-            console.dir(user);
-            console.log(user.id);
-            const html = `<div class="comment outline"><div class="comment-head head">
-                <h5 class="username"><a href="'/users/${user.id.toString()}'">${user.username}</a></h5>
+    $.ajax( "/posts/" + postId + "/comment", {
+        type: "POST",
+        dataType: 'json',
+        contentType: 'application/json',
+        data: JSON.stringify({
+            body: body,
+        }),
+        success: function (data, status, xhr) {
+            console.log("comment posted!");
+
+            const rUser = $.ajax("/users/get/current",{
+                dataType: "json",
+                success: function () {
+                    const user = JSON.parse(rUser);
+                    console.dir(user);
+                    console.log(user);
+                    const html = `<div class="comment outline"><div class="comment-head head">
+                <h5 class="username"><a href="'/users/${user.id}'">${user.username}</a></h5>
                 </div>
                 <div class="comment-body body">
-                <p th:text="${body}"></p>
+                <p>${body}</p>
                 </div>
                 <div class="info">
                 <form class="like like-post" method="post">
@@ -95,25 +105,14 @@ $(".comment-button").on("click", function () {
                 </form>
                 <p class="rating">0</p>
                 </div></div>`;
-            addTo.innerHTML += html;
-        }
-    });
+                    addTo.innerHTML += html;
+                }
+            });
 
-    $.ajax( "/posts/" + postId + "/comment", {
-        type: "POST",
-        dataType: 'json',
-        contentType: 'application/json',
-        data: JSON.stringify({
-            // id: null,
-            body: body,
-            // post_id: postId,
-            // user_id: null
-        }),
-        success: function (data, status, xhr) {
-            console.log("comment posted!");
         },
         error: function (e) {
-            console.log("Id to like: ");
+            console.dir(user);
+            console.log(user);
             console.log(e);
         }
     });

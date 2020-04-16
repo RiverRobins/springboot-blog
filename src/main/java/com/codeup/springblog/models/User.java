@@ -16,14 +16,17 @@ public class User {
     private String username;
     @Column(nullable = false)
     private String email;
+    @JsonIgnore
     @Column(nullable = false, length = 100)
     private String password;
     @Column(nullable = false)
     private String bio;
 
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Post> posts;
 
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Post> comments;
 
@@ -41,9 +44,11 @@ public class User {
 //    )
 //    private List<User> followers;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "follower")
     private List<Follow> followers;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "following")
     private List<Follow> following;
 
