@@ -40,6 +40,8 @@ public class PostController {
 
     @GetMapping(path = "/")
     public String index(Model model) {
+        User cUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        model.addAttribute("user", cUser);
         model.addAttribute("posts", Doggo.reverse(pDoa.findAll()));
         model.addAttribute("from", "home");
         return "posts/feed";
@@ -47,6 +49,8 @@ public class PostController {
 
     @GetMapping(path = "/posts")
     public String posts(Model model) {
+        User cUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        model.addAttribute("user", cUser);
         model.addAttribute("posts", Doggo.reverse(pDoa.findAll()));
         model.addAttribute("from", "feed");
         return "posts/feed";
@@ -135,7 +139,8 @@ public class PostController {
 
     @GetMapping(path = "/following")
     public String following(Model model) {
-        User cUser = usersDoa.getOne(((User)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId());
+        User cUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        model.addAttribute("user", cUser);
         model.addAttribute("posts", processPosts(cUser.getAllFollowingPosts(), 25));
         model.addAttribute("from", "following");
         return "posts/feed";

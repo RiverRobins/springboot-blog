@@ -72,10 +72,15 @@ $(".like-comment").on("click", function () {
         }
     });
 });
+
+
+let user;
+
 $(".comment-button").on("click", function () {
     const postId = $(this).parent().children()[2].value;
     const body = $(this).parent().children()[1].value;
     const addTo = $(this).parent().parent().parent().children()[4];
+    const username = $(this).parent().children()[3].value;
     $.ajax( "/posts/" + postId + "/comment", {
         type: "POST",
         dataType: 'json',
@@ -85,15 +90,8 @@ $(".comment-button").on("click", function () {
         }),
         success: function (data, status, xhr) {
             console.log("comment posted!");
-
-            const rUser = $.ajax("/users/get/current",{
-                dataType: "json",
-                success: function () {
-                    const user = JSON.parse(rUser);
-                    console.dir(user);
-                    console.log(user);
-                    const html = `<div class="comment outline"><div class="comment-head head">
-                <h5 class="username"><a href="'/users/${user.id}'">${user.username}</a></h5>
+            const html = `<div class="comment outline"><div class="comment-head head">
+                <h5 class="username"><a href="/profile">${username}</a></h5>
                 </div>
                 <div class="comment-body body">
                 <p>${body}</p>
@@ -105,12 +103,20 @@ $(".comment-button").on("click", function () {
                 </form>
                 <p class="rating">0</p>
                 </div></div>`;
-                    addTo.innerHTML += html;
-                }
-            });
+            addTo.innerHTML += html;
+            // const rUser = $.ajax("/users/get/current",{
+            //     dataType: "json",
+            //     success: function () {
+            //         // user = JSON.parse(rUser);
+            //         console.dir(user);
+            //         console.log(user);
+            //
+            //     }
+            // });
 
         },
         error: function (e) {
+            console.log("error");
             console.dir(user);
             console.log(user);
             console.log(e);
