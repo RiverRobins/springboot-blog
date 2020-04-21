@@ -139,7 +139,7 @@ public class PostController {
 
     @GetMapping(path = "/following")
     public String following(Model model) {
-        User cUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User cUser = usersDoa.getOne(((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId());
         model.addAttribute("user", cUser);
         model.addAttribute("posts", processPosts(cUser.getAllFollowingPosts(), 25));
         model.addAttribute("from", "following");
