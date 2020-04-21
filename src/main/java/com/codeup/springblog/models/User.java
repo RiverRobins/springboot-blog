@@ -157,13 +157,22 @@ public class User {
 //        return all;
 //    }
 
-    public List<Follow> getFollowing() {
-        return following;
-    }
+//    public List<Follow> getFollowing() {
+//        return following;
+//    }
+//
+//    public void setFollowing(List<Follow> following) {
+//        this.following = following;
+//    }
+//
+//    public List<Follow> getFollowers() {
+//        return followers;
+//    }
+//
+//    public void setFollowers(List<Follow> followers) {
+//        this.followers = followers;
+//    }
 
-    public void setFollowing(List<Follow> following) {
-        this.following = following;
-    }
 
     public List<Follow> getFollowers() {
         return followers;
@@ -173,12 +182,25 @@ public class User {
         this.followers = followers;
     }
 
+    public List<Follow> getFollowing() {
+        return following;
+    }
+
+    public void setFollowing(List<Follow> following) {
+        this.following = following;
+    }
+
     @JsonIgnore
     public ArrayList<Post> getAllFollowingPosts(){
         ArrayList<Post> all = new ArrayList<>();
-        for (Follow follow : this.following) {
-            all.addAll(follow.getFollowing().getPosts());
-        }
+//        if (this.following != null) {
+            for (Follow follow : this.following) {
+                all.addAll(follow.getFollowing().getPosts());
+                for (Post post: follow.getFollowing().getPosts()){
+                    System.out.println("Post Id: " + post.getId().toString());
+                }
+            }
+//        }
         return all;
     }
 

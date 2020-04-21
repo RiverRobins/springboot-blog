@@ -40,8 +40,8 @@ public class PostController {
 
     @GetMapping(path = "/")
     public String index(Model model) {
-        User cUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        model.addAttribute("user", cUser);
+//        User cUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        model.addAttribute("user", cUser);
         model.addAttribute("posts", Doggo.reverse(pDoa.findAll()));
         model.addAttribute("from", "home");
         return "posts/feed";
@@ -49,8 +49,8 @@ public class PostController {
 
     @GetMapping(path = "/posts")
     public String posts(Model model) {
-        User cUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        model.addAttribute("user", cUser);
+//        User cUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        model.addAttribute("user", cUser);
         model.addAttribute("posts", Doggo.reverse(pDoa.findAll()));
         model.addAttribute("from", "feed");
         return "posts/feed";
@@ -130,9 +130,9 @@ public class PostController {
         User cUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User userToFollow = usersDoa.getOne(Long.parseLong(userId));
         Follow fol = new Follow(cUser, userToFollow);
-        if (fol.getId() == null){
-            fol.setId(1L);
-        }
+//        if (fol.getId() == null){
+//            fol.setId(1L);
+//        }
         followDoa.save(fol);
         return "";
     }
