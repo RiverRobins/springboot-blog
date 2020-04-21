@@ -104,16 +104,6 @@ $(".comment-button").on("click", function () {
                 <p class="rating">0</p>
                 </div></div>`;
             addTo.innerHTML += html;
-            // const rUser = $.ajax("/users/get/current",{
-            //     dataType: "json",
-            //     success: function () {
-            //         // user = JSON.parse(rUser);
-            //         console.dir(user);
-            //         console.log(user);
-            //
-            //     }
-            // });
-
         },
         error: function (e) {
             console.log("error");
