@@ -78,7 +78,7 @@ let user;
 
 $(".comment-button").on("click", function () {
     const postId = $(this).parent().children()[2].value;
-    const body = $(this).parent().children()[1].value;
+    let body = $(this).parent().children()[1].value;
     const addTo = $(this).parent().parent().parent().children()[4];
     const username = $(this).parent().children()[3].value;
     $.ajax( "/posts/" + postId + "/comment", {
@@ -104,12 +104,26 @@ $(".comment-button").on("click", function () {
                 <p class="rating">0</p>
                 </div></div>`;
             addTo.innerHTML += html;
+            body = "";
         },
         error: function (e) {
             console.log("error");
-            console.dir(user);
-            console.log(user);
             console.log(e);
+            const html = `<div class="comment outline"><div class="comment-head head">
+                <h5 class="username"><a href="/profile">${username}</a></h5>
+                </div>
+                <div class="comment-body body">
+                <p>${body}</p>
+                </div>
+                <div class="info">
+                <form class="like like-post" method="post">
+                <button class="like-comment" type="button"><img src="" alt="like-icon"></button>
+                <input type="hidden" name="postId" value="${postId}">
+                </form>
+                <p class="rating">0</p>
+                </div></div>`;
+            addTo.innerHTML += html;
+            body = "";
         }
     });
 });
