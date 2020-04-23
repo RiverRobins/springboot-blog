@@ -2,7 +2,6 @@ package com.codeup.springblog.controllers;
 
 import com.codeup.springblog.models.*;
 import com.codeup.springblog.repositories.*;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -41,7 +40,11 @@ public class PostController {
     @GetMapping(path = "/")
     public String index(Model model) {
 //        User cUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        model.addAttribute("user", cUser);
+//        model.addAttribute("user", usersDoa.getOne(cUser.getId()));
+        if (SecurityContextHolder.getContext().getAuthentication().isAuthenticated()){
+            User cUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+                    model.addAttribute("username", usersDoa.getOne(cUser.getId()));
+        }
         model.addAttribute("posts", Doggo.reverse(pDoa.findAll()));
         model.addAttribute("from", "home");
         return "posts/feed";
@@ -50,7 +53,10 @@ public class PostController {
     @GetMapping(path = "/posts")
     public String posts(Model model) {
 //        User cUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        model.addAttribute("user", cUser);
+//        model.addAttribute("user", usersDoa.getOne(cUser.getId()));
+        if (SecurityContextHolder.getContext().getAuthentication().isAuthenticated()){
+            model.addAttribute("user", usersDoa.getOne(((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId()));
+        }
         model.addAttribute("posts", Doggo.reverse(pDoa.findAll()));
         model.addAttribute("from", "feed");
         return "posts/feed";
