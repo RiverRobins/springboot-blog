@@ -41,10 +41,10 @@ public class PostController {
     public String index(Model model) {
 //        User cUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 //        model.addAttribute("user", usersDoa.getOne(cUser.getId()));
-        if (SecurityContextHolder.getContext().getAuthentication().isAuthenticated()){
-            User cUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-                    model.addAttribute("username", usersDoa.getOne(cUser.getId()));
-        }
+//        if (SecurityContextHolder.getContext().getAuthentication().isAuthenticated()){
+//            User cUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//                    model.addAttribute("username", usersDoa.getOne(cUser.getId()));
+//        }
         model.addAttribute("posts", Doggo.reverse(pDoa.findAll()));
         model.addAttribute("from", "home");
         return "posts/feed";
