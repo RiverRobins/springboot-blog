@@ -39,27 +39,14 @@ public class PostController {
 
     @GetMapping(path = "/")
     public String index(Model model) {
-//        User cUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        model.addAttribute("user", usersDoa.getOne(cUser.getId()));
-        if (SecurityContextHolder.getContext().getAuthentication() != null &&
-                SecurityContextHolder.getContext().getAuthentication().isAuthenticated()){
-            User cUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-                    model.addAttribute("username", usersDoa.getOne(cUser.getId()));
-        }
-        model.addAttribute("posts", Doggo.reverse(pDoa.findAll()));
+        model.addAttribute("posts", processPosts((ArrayList<Post>) pDoa.findAll(), 5));
         model.addAttribute("from", "home");
         return "posts/feed";
     }
 
     @GetMapping(path = "/posts")
     public String posts(Model model) {
-//        User cUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        model.addAttribute("user", usersDoa.getOne(cUser.getId()));
-        if (SecurityContextHolder.getContext().getAuthentication() != null &&
-                SecurityContextHolder.getContext().getAuthentication().isAuthenticated()){
-            model.addAttribute("user", usersDoa.getOne(((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId()));
-        }
-        model.addAttribute("posts", Doggo.reverse(pDoa.findAll()));
+        model.addAttribute("posts", processPosts((ArrayList<Post>) pDoa.findAll()));
         model.addAttribute("from", "feed");
         return "posts/feed";
     }
