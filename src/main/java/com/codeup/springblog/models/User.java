@@ -133,47 +133,6 @@ public class User {
         this.comments = comments;
     }
 
-//    public List<User> getFollowing() {
-//        return following;
-//    }
-//
-//    public void setFollowing(List<User> following) {
-//        this.following = following;
-//    }
-//
-//    public List<User> getFollowers() {
-//        return followers;
-//    }
-//
-//    public void setFollowers(List<User> followers) {
-//        this.followers = followers;
-//    }
-//
-//    public ArrayList<Post> getAllFollowingPosts(){
-//        ArrayList<Post> all = new ArrayList<>();
-//        for (User follow : this.following) {
-//            all.addAll(follow.getPosts());
-//        }
-//        return all;
-//    }
-
-//    public List<Follow> getFollowing() {
-//        return following;
-//    }
-//
-//    public void setFollowing(List<Follow> following) {
-//        this.following = following;
-//    }
-//
-//    public List<Follow> getFollowers() {
-//        return followers;
-//    }
-//
-//    public void setFollowers(List<Follow> followers) {
-//        this.followers = followers;
-//    }
-
-
     public List<Follow> getFollowers() {
         return followers;
     }
