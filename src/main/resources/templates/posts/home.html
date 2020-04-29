@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+    <title>Home</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+</head>
+<body>
+<div th:replace="partials/fragment.html :: nav"></div>
+<div id="posts">
+    <div th:each="post : ${posts}" class="post-container outline">
+        <div class="post outline" th:id="${'post-'+ post.getId()}">
+            <div class="post-head">
+                <div class="username"><h5><a th:href="${'/users/' + post.getUser().getId()}" th:text="${post.getUser().getUsername()}"></a></h5></div>
+                <div class="follow" th:if="${!from.equalsIgnoreCase('following')}">
+                    <form action="" sec:authorize="isAuthenticated()">
+                        <input type="hidden" name="user-id" th:value="${post.getUser().getId()}">
+                        <input type="hidden" name="from" th:value="${from}">
+                        <button class="follow-button" type="button">Follow</button>
+                    </form>
+                </div>
+                <div class="title"><h3><a th:href="${'/posts/' + post.getId()}" th:text="${post.getTitle()}"></a></h3></div>
+            </div>
+            <div class="post-body">
+                <p th:text="${post.getBody()}"></p>
+            </div>
+            <div class="info">
+                <form sec:authorize="isAuthenticated()" class="like like-post" method="post">
+                    <input type="hidden" class="id" name="postId" th:value="${post.getId()}">
+                    <input type="hidden" class="from" name="from" th:value="${from}">
+                    <button class="like-button" th:id="${'like-' + post.getId().toString()}" type="button"><img src="" alt="like-icon"></button>
+                </form>
+                <p class="rating" th:text="${post.getRating()}">0</p>
+            </div>
+            <div sec:authorize="isAuthenticated()" class="comment-form">
+                <form th:action='${"/posts/" +post.getId()+ "/comment"}' method="POST">
+                    <input id="body" name="body" type="text" placeholder="Leave a comment.">
+                    <input type="hidden" name="postId" th:id="${'leave-comment-' + post.getId()}" th:value="${post.getId()}">
+                    <!--                    <input type="hidden" name="user" th:value="${user.getUsername()}">-->
+                    <button class="comment-button" type="button">Post Comment</button>
+                </form>
+            </div>
+            <div class="comments outline-top">
+                <div th:each="comment : ${post.getTopComments()}" class="comment outline">
+                    <div class="comment-head head">
+                        <h5 class="username"><a th:href="${'/users/' + post.getUser().getId()}" th:text="${post.getUser().getUsername()}"></a></h5>
+                    </div>
+                    <div class="comment-body body">
+                        <p th:text="${comment.getBody()}"></p>
+                    </div>
+                    <div class="info">
+                        <form sec:authorize="isAuthenticated()" class="like like-post" method="post">
+                            <input type="hidden" class="id" name="commentId" th:value="${comment.getId()}">
+                            <input type="hidden" class="from" name="from" th:value="${from}">
+                            <button class="like-comment" th:id="${'like-' + comment.getId().toString()}" type="button"><img src="" alt="like-icon"></button>
+                            <input type="hidden" name="postId" th:value="${post.getId()}">
+                        </form>
+                        <p class="rating" th:text="${comment.getRating()}">0</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
