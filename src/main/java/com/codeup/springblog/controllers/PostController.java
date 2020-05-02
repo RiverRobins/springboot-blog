@@ -37,11 +37,11 @@ public class PostController {
         this.followDoa = followDoa;
     }
 
-    @GetMapping(path = "/")
+    @GetMapping(path = "/home")
     public String index(Model model) {
         model.addAttribute("posts", processPosts((ArrayList<Post>) pDoa.findAll(), 5));
         model.addAttribute("from", "home");
-        return "posts/feed";
+        return "posts/home";
     }
 
     @GetMapping(path = "/posts")
