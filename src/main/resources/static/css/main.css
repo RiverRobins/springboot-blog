@@ -32,7 +32,8 @@ a {
     border-top: 1px solid lightgray;
 }
 .post{
-    color: white;
+    color: black;
+    background-color: white;
 }
 .post-container{
     margin: 5px 5px 5px 5px; /*Top-Right-Bottom-Left*/

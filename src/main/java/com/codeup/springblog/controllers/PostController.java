@@ -41,7 +41,7 @@ public class PostController {
     public String index(Model model) {
         model.addAttribute("posts", processPosts((ArrayList<Post>) pDoa.findAll(), 5));
         model.addAttribute("from", "home");
-        return "posts/home";
+        return "/home-logged-in";
     }
 
     @GetMapping(path = "/posts")
